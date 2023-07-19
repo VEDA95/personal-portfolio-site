@@ -3,7 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import node from '@astrojs/node';
 import image from '@astrojs/image';
-import glsl from 'vite-plugin-glsl';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,8 +10,5 @@ export default defineConfig({
   integrations: [tailwind(), react(), image()],
   adapter: node({
     mode: 'standalone'
-  }),
-  vite: {
-    plugins: [glsl()]
-  }
+  })
 });
