@@ -1,7 +1,7 @@
 ---
-import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { NavBar, PrimaryOffCanvasMenu } from '../components/nav';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 config.autoAddCss = false;
 export interface Props {
@@ -18,12 +18,22 @@ const { title } = Astro.props;
 		<meta name="description" content="Astro description">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="grid grid-cols-1 grid-rows-[auto_auto_2fr] max-w-full min-h-screen bg-neutral-800 text-neutral-200">
+	<body class="grid grid-cols-1 grid-rows-[auto_auto_2fr] max-w-full min-h-screen bg-neutral-800 text-neutral-200 font-sans">
 		<NavBar client:load />
 		<PrimaryOffCanvasMenu client:media="(max-width: 768px)" />
 		<slot />
+		<footer class="flex flex-row justify-between mx-2 md:mx-4 p-6 lg:p-8">
+			<div class="flex flex-col w-1/2">
+				<span><span class="font-bold">Hours</span>: 9AM - 9PM (EST.)</span>
+				<span class="font-thin">&copy; Copyright 2023</span>
+			</div>
+			<div class="flex flex-col w-1/2"></div>
+		</footer>
 	</body>
 </html>
