@@ -15,6 +15,7 @@
     "@astrojs/react": "^2.2.1",
     "@astrojs/tailwind": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/pro-light-svg-icons": "^6.4.0",
     "@fortawesome/pro-regular-svg-icons": "^6.4.0",
     "@fortawesome/pro-solid-svg-icons": "^6.4.0",
