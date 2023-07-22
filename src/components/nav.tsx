@@ -2,7 +2,8 @@ import { Fragment, useCallback, useMemo } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
-import useOffCanvasState from '../state/offCanvas';
+import classNames from 'classnames';
+import useNavState from '../state/nav';
 import type { ReactElement, FC } from 'react';
 
 interface IPage {
@@ -15,7 +16,7 @@ export interface NavBarProps {
 }
 
 export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
-	const setOffCanvas = useOffCanvasState((state) => state.setOffCanvas);
+	const [sticky, setOffCanvas] = useNavState((state) => [state.sticky, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
     const pages: Array<IPage> = useMemo(() => {
         switch(layout) {
@@ -35,9 +36,13 @@ export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
                 ];
         }
     }, [layout]);
+    const navClasses: string = classNames({
+        'bg-transparent': !sticky,
+        'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)]': sticky
+    });
 
 	return (
-		<header className="bg-transparent">
+		<header className={navClasses}>
 			<nav className="mx-2 md:mx-4 flex items-center justify-between p-6 lg:px-8" aria-label="Global">
 				<a href="#" className="-m-1.5 p-1.5">
 					<span className="sr-only">Your Company</span>
@@ -69,7 +74,7 @@ export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
 }
 
 export function PrimaryOffCanvasMenu(): ReactElement<FC> {
-	const [enabled, setOffCanvas] = useOffCanvasState((state) => [state.enabled, state.setOffCanvas]);
+	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
     const pages: Array<IPage> = useMemo(() => ([
         { name: 'Product', href: '#' },
@@ -79,7 +84,7 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
     ]), []);
 
 	return (
-		<Transition.Root show={enabled} as={Fragment}>
+		<Transition.Root show={offCanvas} as={Fragment}>
 			<Dialog as="div" className="md:hidden" onClose={setOffCanvas}>
 				<Transition.Child
                         as={Fragment}
