@@ -151,14 +151,9 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                                                     <a href="#">Home</a>
                                                 </li>
                                                 <li
-                                                    key="software_development"
-                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">Software Development</a>
-                                                </li>
-                                                <li
                                                     key="tech"
                                                     className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">Tech</a>
+                                                    <a href="#">Software / Tech</a>
                                                 </li>
                                                 <li
                                                     key="after_hours"
