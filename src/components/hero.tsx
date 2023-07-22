@@ -2,11 +2,13 @@ import { useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
+import useNavState from '../state/nav';
 import HireBadge from './hireBadge';
 import type {ReactElement, FC, MutableRefObject} from 'react';
 
 export default function HeroSection(): ReactElement<FC> {
     const heroRef: MutableRefObject<any> = useRef(null);
+    const [sticky, setSticky] = useNavState((state) => [state.sticky, state.setSticky]);
     const [headingSpringStyles, headingApi] = useSpring({
         translateY: '0',
         opacity: 0,
@@ -31,6 +33,11 @@ export default function HeroSection(): ReactElement<FC> {
             behavior: 'smooth'
         });
     }, []);
+    const handleScroll = useCallback(() => {
+        if(heroRef.current == null) return;
+        if((window.scrollY <= heroRef.current.clientHeight) && sticky) setSticky(false);
+        if((window.scrollY > heroRef.current.clientHeight) && !sticky) setSticky(true);
+    }, [sticky]);
 
     useEffect(() => {
         const headingTimeout = setTimeout(() => {
@@ -49,6 +56,14 @@ export default function HeroSection(): ReactElement<FC> {
             clearTimeout(scrollButtonTimeout);
         };
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, {passive: true});
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [sticky]);
 
     return (
         <div ref={heroRef} className="flex flex-row w-screen h-[calc(100vh_-_7rem)] justify-center">
