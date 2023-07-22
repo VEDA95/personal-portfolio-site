@@ -131,7 +131,7 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                                     leave="transform tansform-gpu transition ease-in-out duration-500 sm:duration-500"
                                     leaveFrom="translate-x-0"
                                     leaveTo="translate-x-full">
-                                <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-neutral-800 text-neutral-200">
+                                <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-neutral-700 text-neutral-200">
                                     <div className="flex items-center justify-between p-4">
                                         <a href="#" className="-m-1.5 p-1.5">
                                             <span className="sr-only">Your Company</span>
