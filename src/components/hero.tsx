@@ -22,6 +22,15 @@ export default function HeroSection(): ReactElement<FC> {
         opacity: 0,
         duration: 200
     }, []);
+    const handleClick = useCallback(() => {
+        if(heroRef.current == null) return;
+
+        window.scrollTo({
+            left: 0,
+            top: heroRef.current.clientHeight + 16,
+            behavior: 'smooth'
+        });
+    }, []);
 
     useEffect(() => {
         const headingTimeout = setTimeout(() => {
@@ -60,6 +69,7 @@ export default function HeroSection(): ReactElement<FC> {
                 <div className="flex flex-row justify-center w-full h-24">
                     <animated.button
                         type="button"
+                        onClick={handleClick}
                         className="h-12 bg-neutral-200 text-sm text-neutral-800 rounded-full p-3 mb-2 transition transform-gpu ease-linear hover:bg-dark-red hover:text-neutral-200 align-middle"
                         style={scrollButtonSpringStyles}>
                         Scroll Down <FontAwesomeIcon icon={faChevronDown} />
