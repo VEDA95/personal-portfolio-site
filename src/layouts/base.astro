@@ -17,7 +17,7 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
+		<meta name="description" content="Personal portfolio site of Stefan Netterfield...">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,7 +27,26 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="grid grid-cols-1 grid-rows-[auto_auto_2fr] max-w-full min-h-screen bg-neutral-800 text-neutral-200 font-sans">
-		<NavBar client:load />
+		<NavBar client:load>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">Home</a>
+			</li>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">About</a>
+			</li>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">Skills</a>
+			</li>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">Projects</a>
+			</li>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">Contact</a>
+			</li>
+			<li class="text-sm font-semibold leading-6">
+				<a href="#">Blog</a>
+			</li>
+		</NavBar>
 		<PrimaryOffCanvasMenu client:media="(max-width: 768px)" />
 		<slot />
 		<footer class="flex flex-col md:flex-row justify-center md:justify-between mx-2 md:mx-4 p-6 lg:p-8">
