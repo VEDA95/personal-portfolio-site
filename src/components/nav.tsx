@@ -102,3 +102,83 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
 		</Transition.Root>
 	);
 }
+
+export function SecondaryOffCanvasMenu(): ReactElement<FC> {
+    const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
+	const handleClick = useCallback(() => setOffCanvas(false), []);
+
+    return (
+        <Transition.Root show={offCanvas} as={Fragment}>
+			<Dialog as="div" className="md:hidden" onClose={setOffCanvas}>
+                <Transition.Child
+                        as={Fragment}
+                        enter="ease-in-out duration-500"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in-out duration-500"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0">
+                        <div className="block fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" onClick={handleClick} />
+                </Transition.Child>
+                <div className="fixed inset-0 overflow-hidden">
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                            <Transition.Child
+                                    as={Fragment}
+                                    enter="transform transform-gpu transition ease-in-out duration-500 sm:duration-500"
+                                    enterFrom="translate-x-full"
+                                    enterTo="translate-x-0"
+                                    leave="transform tansform-gpu transition ease-in-out duration-500 sm:duration-500"
+                                    leaveFrom="translate-x-0"
+                                    leaveTo="translate-x-full">
+                                <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-neutral-800 text-neutral-200">
+                                    <div className="flex items-center justify-between p-4">
+                                        <a href="#" className="-m-1.5 p-1.5">
+                                            <span className="sr-only">Your Company</span>
+                                            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                                        </a>
+                                        <button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
+                                            <span className="sr-only">Close menu</span>
+                                            <FontAwesomeIcon icon={faXmark} className="h-6 w-6" aria-hidden="true" />
+                                        </button>
+                                    </div>
+                                    <div className="mt-6 flow-root">
+                                        <div className="-my-6 divide-y divide-gray-500/10">
+                                            <ul className="space-y-2 py-6">
+                                                <li
+                                                    key="home"
+                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+                                                    <a href="#">Home</a>
+                                                </li>
+                                                <li
+                                                    key="software_development"
+                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+                                                    <a href="#">Software Development</a>
+                                                </li>
+                                                <li
+                                                    key="tech"
+                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+                                                    <a href="#">Tech</a>
+                                                </li>
+                                                <li
+                                                    key="after_hours"
+                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+                                                    <a href="#">After Hours</a>
+                                                </li>
+                                                <li
+                                                    key="return_to_site"
+                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+                                                    <a href="#">Return to Site</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </div>
+			</Dialog>
+		</Transition.Root>
+    );
+}
