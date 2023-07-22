@@ -1,41 +1,15 @@
-import { Fragment, useCallback, useMemo } from 'react';
+import { Fragment, useCallback } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
 import classNames from 'classnames';
 import useNavState from '../state/nav';
-import type { ReactElement, FC } from 'react';
+import type { ReactElement, FC, PropsWithChildren } from 'react';
 
-interface IPage {
-    name: string;
-    href: string;
-}
 
-export interface NavBarProps {
-    layout?: 'base' | 'blog';
-}
-
-export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
+export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
 	const [sticky, setOffCanvas] = useNavState((state) => [state.sticky, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
-    const pages: Array<IPage> = useMemo(() => {
-        switch(layout) {
-            case 'base':
-                return [
-                    { name: 'Product', href: '#' },
-                    { name: 'Features', href: '#' },
-                    { name: 'Marketplace', href: '#' },
-                    { name: 'Company', href: '#' }
-                ];
-            case 'blog':
-                return [
-                    { name: 'Product', href: '#' },
-                    { name: 'Features', href: '#' },
-                    { name: 'Marketplace', href: '#' },
-                    { name: 'Company', href: '#' }
-                ];
-        }
-    }, [layout]);
     const navClasses: string = classNames({
         'bg-transparent': !sticky,
         'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)]': sticky
@@ -54,20 +28,7 @@ export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
 						<FontAwesomeIcon icon={faBars} className="h-6 w-6" aria-hidden="true" />
 					</button>
 				</div>
-				<ul className="hidden md:flex md:gap-x-6 lg:gap-x-12">
-					{pages.map((item) => (
-						<li key={item.name} className="text-sm font-semibold leading-6">
-							<a href={item.href}>{item.name}</a>
-						</li>
-					))}
-                    {layout === 'blog' ? (
-                        <li className="text-sm font-semibold leading-6">
-						    <a href="/">
-							    Return to Site <span aria-hidden="true">&rarr;</span>
-						    </a>
-					    </li>
-                    ) : null}
-				</ul>
+				<ul className="hidden md:flex md:gap-x-6 lg:gap-x-12">{children}</ul>
 			</nav>
 		</header>
 	);
@@ -76,12 +37,6 @@ export function NavBar({layout = 'base'}: NavBarProps): ReactElement<FC> {
 export function PrimaryOffCanvasMenu(): ReactElement<FC> {
 	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
-    const pages: Array<IPage> = useMemo(() => ([
-        { name: 'Product', href: '#' },
-        { name: 'Features', href: '#' },
-        { name: 'Marketplace', href: '#' },
-        { name: 'Company', href: '#' }
-    ]), []);
 
 	return (
 		<Transition.Root show={offCanvas} as={Fragment}>
@@ -108,14 +63,36 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
 						<div className="mt-6 flow-root">
 							<div className="-my-6 divide-y divide-gray-500/10">
 								<ul className="space-y-2 py-6">
-									{pages.map((item) => (
-										<li
-											key={item.name}
-											className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200"
-										>
-											<a href={item.href}>{item.name}</a>
-										</li>
-									))}
+                                    <li
+									    key="home"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">Home</a>
+									</li>
+                                    <li
+									    key="about"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">About</a>
+									</li>
+                                    <li
+									    key="skills"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">Skills</a>
+									</li>
+                                    <li
+									    key="projects"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">Projects</a>
+									</li>
+                                    <li
+									    key="contact"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">Contact</a>
+									</li>
+                                    <li
+									    key="blog"
+										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-neutral-200">
+										<a href="#">Blog</a>
+									</li>
 								</ul>
 							</div>
 						</div>
