@@ -1,10 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ParticleWave from '../components/particle_wave';
 import ParticleOrb from '../components/particle_orb';
 ---
 
 <Layout title="Welcome to Astro.">
-	<main class="bg-neutral-900">
+	<main class="w-screen h-screen bg-neutral-900">
 		<ParticleOrb client:load />
 	</main>
 </Layout>
+
