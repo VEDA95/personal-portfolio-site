@@ -3,6 +3,6 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "typeRoots": ["./node_modules/@types", "./src/env.d.ts", "./src/glsl.d.ts", "./src/react-three-fiber.d.ts"]
+    "typeRoots": ["./node_modules/@types", "./src/env.d.ts", "./src/react-three-fiber.d.ts"]
   }
 }
