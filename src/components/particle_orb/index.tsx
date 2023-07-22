@@ -86,7 +86,7 @@ function FBOParticles(): ReactElement<FC> {
 
 export default function ParticleOrb(): ReactElement<FC> {
 	return (
-		<Canvas camera={{ position: [1.5, 1.5, 2.5] }}>
+		<Canvas camera={{ position: [1.5, 1.5, 2.5] }} style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20}}>
 			<ambientLight intensity={0.5} />
 			<FBOParticles />
 			<OrbitControls />
