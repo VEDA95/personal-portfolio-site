@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
+import { Waypoint } from 'react-waypoint';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
@@ -9,6 +10,9 @@ import type {ReactElement, FC, MutableRefObject} from 'react';
 
 export default function HeroSection(): ReactElement<FC> {
     const heroRef: MutableRefObject<any> = useRef(null);
+    const headingTimerRef: MutableRefObject<any> = useRef(null);
+    const subHeadingTimerRef: MutableRefObject<any> = useRef(null);
+    const scrollButtonTimerRef: MutableRefObject<any> = useRef(null);
     const [sticky, setSticky] = useNavState((state) => [state.sticky, state.setSticky]);
     const [headingSpringStyles, headingApi] = useSpring({
         translateY: '0',
@@ -36,30 +40,30 @@ export default function HeroSection(): ReactElement<FC> {
     }, []);
     const handleScroll = useCallback(() => {
         if(heroRef.current == null) return;
-
         if((window.scrollY <= heroRef.current.clientHeight) && sticky) setSticky(false);
         if((window.scrollY >= heroRef.current.clientHeight + 160) && !sticky) setSticky(true);
     }, [sticky]);
-
-    useEffect(() => {
-        const headingTimeout = setTimeout(() => {
+    const handleEnter = useCallback(() => {
+        headingTimerRef.current = setTimeout(() => {
             headingApi.start({translateY: '-1.75rem', opacity: 100});
         }, 2000);
-        const subHeadingTimeout = setTimeout(() => {
+        subHeadingTimerRef.current = setTimeout(() => {
             subHeadingApi.start({translateY: '-1.5rem', opacity: 100});
         }, 2500);
-        const scrollButtonTimeout = setTimeout(() => {
+        scrollButtonTimerRef.current = setTimeout(() => {
             scrollButtonApi.start({translateY: '2.5rem', opacity: 100});
         }, 2500);
+    }, []);
 
+    useEffect(() => {
         if(heroRef.current != null) {
             if(window.scrollY > heroRef.current.clientHeight) setSticky(true);
         }
 
         return () => {
-            clearTimeout(headingTimeout);
-            clearTimeout(subHeadingTimeout);
-            clearTimeout(scrollButtonTimeout);
+            clearTimeout(headingTimerRef.current);
+            clearTimeout(subHeadingTimerRef.current);
+            clearTimeout(scrollButtonTimerRef.current);
         };
     }, []);
 
@@ -72,31 +76,33 @@ export default function HeroSection(): ReactElement<FC> {
     }, [sticky]);
 
     return (
-        <section ref={heroRef} className="flex flex-row w-full h-[calc(100vh_-_7rem)] justify-center">
-            <div className="flex flex-col w-3/4 justify-between">
-                <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
-                    <animated.h1
-                        className="font-bold text-6xl transform-gpu transition-opacity ease-in"
-                        style={headingSpringStyles}>
-                        Stefan Netterfield
-                    </animated.h1>
-                    <animated.div className="pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
-                        <h2 className="font-thin text-3xl">Dedicated FullStack Developer</h2>
-                        <div className="pt-1 opacity-90">
-                            <HireBadge />
-                        </div>
-                    </animated.div>
+        <Waypoint onEnter={handleEnter}>
+            <section ref={heroRef} className="flex flex-row w-full h-layout-dynamic justify-center">
+                <div className="flex flex-col w-3/4 justify-between">
+                    <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
+                        <animated.h1
+                            className="font-bold text-6xl transform-gpu transition-opacity ease-in"
+                            style={headingSpringStyles}>
+                            Stefan Netterfield
+                        </animated.h1>
+                        <animated.div className="pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
+                            <h2 className="font-thin text-3xl">Dedicated FullStack Developer</h2>
+                            <div className="pt-1 opacity-90">
+                                <HireBadge />
+                            </div>
+                        </animated.div>
+                    </div>
+                    <div className="flex flex-row justify-center w-full h-24">
+                        <animated.button
+                            type="button"
+                            onClick={handleClick}
+                            className="h-12 bg-neutral-200 text-sm text-neutral-800 rounded-full p-3 mb-2 transition transform-gpu ease-linear hover:bg-dark-red hover:text-neutral-200 align-middle"
+                            style={scrollButtonSpringStyles}>
+                            Scroll Down <FontAwesomeIcon icon={faChevronDown} />
+                        </animated.button>
+                    </div>
                 </div>
-                <div className="flex flex-row justify-center w-full h-24">
-                    <animated.button
-                        type="button"
-                        onClick={handleClick}
-                        className="h-12 bg-neutral-200 text-sm text-neutral-800 rounded-full p-3 mb-2 transition transform-gpu ease-linear hover:bg-dark-red hover:text-neutral-200 align-middle"
-                        style={scrollButtonSpringStyles}>
-                        Scroll Down <FontAwesomeIcon icon={faChevronDown} />
-                    </animated.button>
-                </div>
-            </div>
-        </section>
+            </section>
+        </Waypoint>
     );
 }
