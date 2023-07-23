@@ -34,7 +34,7 @@ export default function AboutSection(): ReactElement<FC> {
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section className="flex flex-row w-screen h-[calc(100vh_-_7rem)] justify-center mt-32">
+            <section className="flex flex-row w-full h-[calc(100vh_-_7rem)] justify-center mt-32">
                 <div className='flex flex-row w-1/4 pt-16'>
                     <animated.h1
                         className="font-bold text-6xl transform-gpu transition-opacity ease-in"

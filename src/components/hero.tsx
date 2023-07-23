@@ -72,7 +72,7 @@ export default function HeroSection(): ReactElement<FC> {
     }, [sticky]);
 
     return (
-        <section ref={heroRef} className="flex flex-row w-screen h-[calc(100vh_-_7rem)] justify-center">
+        <section ref={heroRef} className="flex flex-row w-full h-[calc(100vh_-_7rem)] justify-center">
             <div className="flex flex-col w-3/4 justify-between">
                 <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
                     <animated.h1
