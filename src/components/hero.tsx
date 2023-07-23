@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
+import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
 import useNavState from '../state/nav';
@@ -29,14 +30,15 @@ export default function HeroSection(): ReactElement<FC> {
 
         window.scrollTo({
             left: 0,
-            top: heroRef.current.clientHeight + 16,
+            top: heroRef.current.clientHeight + 160,
             behavior: 'smooth'
         });
     }, []);
     const handleScroll = useCallback(() => {
         if(heroRef.current == null) return;
+
         if((window.scrollY <= heroRef.current.clientHeight) && sticky) setSticky(false);
-        if((window.scrollY > heroRef.current.clientHeight) && !sticky) setSticky(true);
+        if((window.scrollY >= heroRef.current.clientHeight + 160) && !sticky) setSticky(true);
     }, [sticky]);
 
     useEffect(() => {
@@ -49,6 +51,10 @@ export default function HeroSection(): ReactElement<FC> {
         const scrollButtonTimeout = setTimeout(() => {
             scrollButtonApi.start({translateY: '2.5rem', opacity: 100});
         }, 2500);
+
+        if(heroRef.current != null) {
+            if(window.scrollY > heroRef.current.clientHeight) setSticky(true);
+        }
 
         return () => {
             clearTimeout(headingTimeout);
@@ -66,7 +72,7 @@ export default function HeroSection(): ReactElement<FC> {
     }, [sticky]);
 
     return (
-        <div ref={heroRef} className="flex flex-row w-screen h-[calc(100vh_-_7rem)] justify-center">
+        <section ref={heroRef} className="flex flex-row w-screen h-[calc(100vh_-_7rem)] justify-center">
             <div className="flex flex-col w-3/4 justify-between">
                 <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
                     <animated.h1
@@ -91,6 +97,6 @@ export default function HeroSection(): ReactElement<FC> {
                     </animated.button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

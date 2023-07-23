@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
@@ -9,28 +9,35 @@ import type { ReactElement, FC, PropsWithChildren } from 'react';
 
 export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
 	const [sticky, setOffCanvas] = useNavState((state) => [state.sticky, state.setOffCanvas]);
+    const [hasMounted, setHasMounted] = useState<boolean>(false);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
     const navClasses: string = classNames({
-        'bg-transparent': !sticky,
-        'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)]': sticky
+        'bg-transparent': !sticky || !hasMounted,
+        'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)] z-20': sticky && hasMounted
     });
 
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
+
 	return (
-		<header className={navClasses}>
-			<nav className="mx-2 md:mx-4 flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-				<a href="#" className="-m-1.5 p-1.5">
-					<span className="sr-only">Your Company</span>
-					<img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-				</a>
-				<div className="flex md:hidden">
-					<button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
-						<span className="sr-only">Open main menu</span>
-						<FontAwesomeIcon icon={faBars} className="h-6 w-6" aria-hidden="true" />
-					</button>
-				</div>
-				<ul className="hidden md:flex md:gap-x-6 lg:gap-x-12">{children}</ul>
-			</nav>
-		</header>
+        <div className="flex flex-col w-full h-20">
+            <header className={navClasses}>
+                <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between p-6 lg:px-8" aria-label="Global">
+                    <a href="#" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Your Company</span>
+                        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                    </a>
+                    <div className="flex md:hidden">
+                        <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
+                            <span className="sr-only">Open main menu</span>
+                            <FontAwesomeIcon icon={faBars} className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                    </div>
+                    <ul className="hidden md:flex md:gap-x-6 lg:gap-x-12">{children}</ul>
+                </nav>
+            </header>
+        </div>
 	);
 }
 
