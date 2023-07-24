@@ -3,12 +3,14 @@ import Layout from '../layouts/base.astro';
 import ParticleOrb from '../components/particle_orb';
 import HeroSection from '../components/hero';
 import AboutSection from '../components/about';
+import SkillsSection from '../components/skills';
 ---
 
 <Layout title="Welcome to Astro.">
 	<ParticleOrb client:load />
-	<main class="row-span-6 relative pt-6 px-6 md:pt-8 md:px-8">
+	<main class="row-span-6 relative">
 		<HeroSection client:load />
 		<AboutSection client:visible />
+		<SkillsSection client:visible />
 	</main>
 </Layout>

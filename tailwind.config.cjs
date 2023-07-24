@@ -11,9 +11,6 @@ module.exports = {
 			colors: {
 				'dark-red': '#980404',
 				'crimson-red': '#491921'
-			},
-			height: {
-				'layout-dynamic': 'calc(100vh_-_7rem)'
 			}
 		},
 	},

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { Waypoint } from 'react-waypoint';
-import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
 import useNavState from '../state/nav';
@@ -77,7 +76,7 @@ export default function HeroSection(): ReactElement<FC> {
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={heroRef} className="flex flex-row w-full h-layout-dynamic justify-center">
+            <section ref={heroRef} className="flex flex-row w-full h-[calc(100vh_-_7rem)] justify-center px-6 md:px-8">
                 <div className="flex flex-col w-3/4 justify-between">
                     <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
                         <animated.h1
