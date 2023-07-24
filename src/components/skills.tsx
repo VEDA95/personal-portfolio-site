@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { animated, useTrail } from 'react-spring';
+import { animated, useTrail } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 
