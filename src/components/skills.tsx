@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { animated, useTrail } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
+import useMidState from '../state/mid';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 
 export interface SkillPanelProps {
@@ -31,12 +32,14 @@ export function SkillPanel({name, description, style = {}}: SkillPanelProps): Re
 
 
 export default function SkillsSection(): ReactElement<FC> {
+    const sectionRef: MutableRefObject<any> = useRef(null);
+    const panelTimerRef: MutableRefObject<any> = useRef(null);
+    const setLocation = useMidState((state) => state.setLocation);
     const [panelSpringTrail, panelApi] = useTrail(3, {
         transform: 'scale(0.5)',
         opacity: 0,
         duration: 500
     }, []);
-    const panelTimerRef: MutableRefObject<any> = useRef(null);
     const handleEnter = useCallback(() => {
         panelTimerRef.current = setTimeout(() => {
             panelApi.start({
@@ -47,6 +50,11 @@ export default function SkillsSection(): ReactElement<FC> {
     }, []);
 
     useEffect(() => {
+        if(sectionRef.current != null) {
+            const {top, height} = sectionRef.current.getBoundingClientRect();
+            setLocation((top + window.scrollY) + (height / (height * 0.25)));
+        }
+
         return () => {
             if(panelTimerRef.current != null) clearTimeout(panelTimerRef.current);
         };
@@ -54,7 +62,7 @@ export default function SkillsSection(): ReactElement<FC> {
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] mt-32 bg-crimson-red px-6 md:px-12">
+            <section ref={sectionRef} className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] mt-32 bg-crimson-red px-6 md:px-12">
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>

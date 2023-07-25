@@ -72,7 +72,7 @@ export default function HeroSection(): ReactElement<FC> {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [sticky]);
+    }, [handleScroll]);
 
     return (
         <Waypoint onEnter={handleEnter}>

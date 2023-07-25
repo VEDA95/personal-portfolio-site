@@ -11,6 +11,10 @@ import type { UniformType } from './simulationMaterial';
 
 extend({ SimulationMaterial: SimulationMaterial });
 
+interface ParticleProps {
+	invisible?: boolean;
+}
+
 function FBOParticles(): ReactElement<FC> {
 	const size: number = 256;
 	const points: MutableRefObject<any> = useRef();
@@ -84,9 +88,9 @@ function FBOParticles(): ReactElement<FC> {
 	);
 }
 
-export default function ParticleOrb(): ReactElement<FC> {
+export default function ParticleOrb({ invisible = false }: ParticleProps): ReactElement<FC> {
 	return (
-		<Canvas camera={{ position: [1.5, 1.5, 2.5] }} style={{position: 'fixed', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20}}>
+		<Canvas camera={{ position: [1.5, 1.5, 2.5] }} style={{position: 'fixed', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20, visibility: !invisible ? 'visible' : 'hidden'}}>
 			<ambientLight intensity={0.5} />
 			<FBOParticles />
 			<OrbitControls />

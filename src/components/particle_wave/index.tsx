@@ -1,11 +1,14 @@
-import { useRef, useMemo} from 'react';
+import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame} from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import fragmentShader from './shaders/fragment';
 import vertexShader from './shaders/vertex';
 import type { ReactElement, FC, MutableRefObject } from 'react';
-import type { Scene, PerspectiveCamera} from 'three';
+
+interface ParticleProps {
+	invisible?: boolean;
+}
 
 function ParticleWaveAnimation(): ReactElement<FC> {
 	const particles: MutableRefObject<any> = useRef(null);
@@ -82,9 +85,9 @@ function ParticleWaveAnimation(): ReactElement<FC> {
 	);
 }
 
-export default function ParticleWave(): ReactElement<FC> {
+export default function ParticleWave({invisible = false}: ParticleProps): ReactElement<FC> {
 	return (
-		<Canvas camera={{ position: [0, 0, 1000] }}>
+		<Canvas camera={{ position: [0, 0, 1000] }} style={{position: 'fixed', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20, visibility: !invisible ? 'visible' : 'hidden'}}>
 			<ambientLight intensity={0.5} />
 			<ParticleWaveAnimation />
 			<OrbitControls />
