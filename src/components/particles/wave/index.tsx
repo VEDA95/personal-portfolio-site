@@ -5,10 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import fragmentShader from './shaders/fragment';
 import vertexShader from './shaders/vertex';
 import type { ReactElement, FC, MutableRefObject } from 'react';
-
-interface ParticleProps {
-	invisible?: boolean;
-}
+import type { ParticleProps } from '../types';
 
 function ParticleWaveAnimation(): ReactElement<FC> {
 	const particles: MutableRefObject<any> = useRef(null);

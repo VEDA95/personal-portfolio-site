@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
 import classNames from 'classnames';
-import useNavState from '../state/nav';
+import useNavState from '../../state/nav';
 import type { ReactElement, FC, PropsWithChildren } from 'react';
 
 

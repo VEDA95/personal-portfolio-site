@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { animated, useTrail } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
-import useMidState from '../state/mid';
+import useMidState from '../../state/mid';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 
 export interface SkillPanelProps {

@@ -8,12 +8,10 @@ import fragmentShader from './shaders/fragment';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { Scene, OrthographicCamera, WebGLRenderTarget, Texture } from 'three';
 import type { UniformType } from './simulationMaterial';
+import type { ParticleProps } from '../types';
 
 extend({ SimulationMaterial: SimulationMaterial });
 
-interface ParticleProps {
-	invisible?: boolean;
-}
 
 function FBOParticles(): ReactElement<FC> {
 	const size: number = 256;

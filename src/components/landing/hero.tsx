@@ -3,8 +3,8 @@ import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
-import useNavState from '../state/nav';
-import HireBadge from './hireBadge';
+import useNavState from '../../state/nav';
+import HireBadge from '../layout/hireBadge';
 import type {ReactElement, FC, MutableRefObject} from 'react';
 
 export default function HeroSection(): ReactElement<FC> {

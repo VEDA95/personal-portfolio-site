@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import useMidState from '../state/mid';
-import ParticleOrb from './particle_orb';
-import ParticleWave from './particle_wave';
+import useMidState from '../../state/mid';
+import { ParticleOrb, ParticleWave } from '../particles';
 import type { ReactElement, FC } from 'react';
 
 
