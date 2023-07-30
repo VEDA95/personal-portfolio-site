@@ -84,7 +84,7 @@ function ParticleWaveAnimation(): ReactElement<FC> {
 
 export default function ParticleWave({invisible = false}: ParticleProps): ReactElement<FC> {
 	return (
-		<Canvas camera={{ position: [0, 0, 1000] }} style={{position: 'fixed', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20, visibility: !invisible ? 'visible' : 'hidden'}}>
+		<Canvas camera={{ position: [-100, 100, 1000] }} style={{position: 'fixed', left: 0, top: 0, right: 0, bottom: 0, zIndex: -20, visibility: !invisible ? 'visible' : 'hidden'}}>
 			<ambientLight intensity={0.5} />
 			<ParticleWaveAnimation />
 			<OrbitControls />

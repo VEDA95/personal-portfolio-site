@@ -4,13 +4,15 @@ import ParticleBackground from '../components/landing/background';
 import HeroSection from '../components/landing/hero';
 import AboutSection from '../components/landing/about';
 import SkillsSection from '../components/landing/skills';
+import ProjectSection from '../components/landing/projects';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main class="row-span-6 relative">
-		<ParticleBackground client:load />
+		<ParticleBackground client:idle />
 		<HeroSection client:load />
 		<AboutSection client:visible />
-		<SkillsSection client:visible />
+		<SkillsSection client:load />
+		<ProjectSection client:visible />
 	</main>
 </Layout>

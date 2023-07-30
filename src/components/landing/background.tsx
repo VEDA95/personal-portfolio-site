@@ -14,6 +14,11 @@ export default function ParticleBackground(): ReactElement<FC> {
     }, [location, showAlternate]);
 
     useEffect(() => {
+        if(location == null) return;
+        if((window.scrollY > location) && !showAlternate) setShowAlternate(true);
+    }, []);
+
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll, {passive: true});
 
         return () => {
