@@ -13,11 +13,11 @@ interface ProjectItemProps extends PropsWithChildren {
 
 function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
     return (
-        <li className="flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md">
-            <a href={`/projects/${id}`}>
-                <div className="block w-full h-60 bg-neutral-500" />
+        <li className="flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md transition-colors group duration-300 ease-in hover:cursor-pointer hover:bg-dark-red hover:text-neutral-200">
+            <a href={`/projects/${id}`} className="w-full h-full">
+                <div className="block w-full h-60 bg-neutral-500 transition-colors duration-300 group-hover:bg-neutral-700 ease-in" />
                 <div className="flex flex-row w-full justify-center pt-6">
-                    <h2 className="font-bold text-3xl text-dark-red">{heading}</h2>
+                    <h2 className="font-bold text-3xl text-dark-red group-hover:text-neutral-200 transition-colors duration-300 ease-in">{heading}</h2>
                 </div>
                 <div className="flex flex-row w-full h-7 pt-3 px-3">
                     {children != null ? children : <p>{description}</p>}
@@ -56,7 +56,7 @@ export default function ProjectsSection(): ReactElement<FC> {
                     <h1 className="text-6xl font-bold">Projects</h1>
                 </div>
                 <div className="flex flex-row w-full pt-16 justify-center">
-                    <animated.div className="grid grid-cols-2 md:grid-cols-4 w-1/2 md:w-[75rem] gap-x-4 transition-opacity transform-gpu" style={sectionSpringStyle}>
+                    <animated.div className="grid grid-cols-2 md:grid-cols-4 w-3/4 md:w-[75rem] gap-x-4 transition-opacity transform-gpu" style={sectionSpringStyle}>
                         <ul className="grid auto-rows-[25rem] gap-y-4">
                             <ProjectItem id="test1" heading="test" description="Lorem Ipsum..." />
                             <ProjectItem id="test2" heading="test" description="Lorem Ipsum..." />
@@ -72,7 +72,7 @@ export default function ProjectsSection(): ReactElement<FC> {
                             <ProjectItem id="test8" heading="test" description="Lorem Ipsum..." />
                             <ProjectItem id="test9" heading="test" description="Lorem Ipsum..." />
                         </ul>
-                        <ul className="grid auto-rows-[25rem] gap-y-4 md:mt-10">
+                        <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
                             <ProjectItem id="test10" heading="test" description="Lorem Ipsum..." />
                             <ProjectItem id="test11" heading="test" description="Lorem Ipsum..." />
                             <ProjectItem id="test12" heading="test" description="Lorem Ipsum..." />

@@ -78,15 +78,15 @@ export default function HeroSection(): ReactElement<FC> {
         <Waypoint onEnter={handleEnter}>
             <section ref={heroRef} className="flex flex-row w-full h-[calc(100vh_-_7rem)] justify-center px-6 md:px-8">
                 <div className="flex flex-col w-3/4 justify-between">
-                    <div className="flex flex-col w-full h-40 mt-52 items-start justify-end">
+                    <div className="flex flex-col w-full h-40 mt-52 items-center md:items-start justify-end">
                         <animated.h1
                             className="font-bold text-6xl transform-gpu transition-opacity ease-in"
                             style={headingSpringStyles}>
                             Stefan Netterfield
                         </animated.h1>
-                        <animated.div className="pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
+                        <animated.div className="flex flex-col pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
                             <h2 className="font-thin text-3xl">Dedicated FullStack Developer</h2>
-                            <div className="pt-1 opacity-90">
+                            <div className="flex flex-row justify-center md:justify-start pt-1 opacity-90">
                                 <HireBadge />
                             </div>
                         </animated.div>

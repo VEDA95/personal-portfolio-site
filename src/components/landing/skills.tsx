@@ -62,12 +62,12 @@ export default function SkillsSection(): ReactElement<FC> {
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={sectionRef} className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] mt-32 bg-crimson-red px-6 md:px-12">
+            <section ref={sectionRef} className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] mt-32 bg-crimson-red px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
-                <div className="flex flex-col w-full items-center pt-24">
-                    <ul className="grid grid-flow-col auto-cols-[15rem] auto-rows-[15rem] gap-4 w-1/2 justify-center">
+                <div className="flex flex-col w-full items-center pt-20 md:pt-24">
+                    <ul className="grid grid-cols-2 md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] md:auto-rows-[15rem] gap-4 w-4/6 md:w-1/2 justify-center">
                         {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} name="Hello" description="World" style={panelStyle} />)}
                     </ul>
                 </div>

@@ -24,7 +24,7 @@ export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
         <div className="flex flex-col w-full h-20">
             <header className={navClasses}>
                 <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between p-6 lg:px-8" aria-label="Global">
-                    <a href="#" className="-m-1.5 p-1.5">
+                    <a href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
                         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                     </a>
@@ -56,9 +56,9 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
                         leave="transition transform transform-gpu duration-400"
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-50">
-					<Dialog.Panel className="fixed inset-0 z-10 w-full overflow-y-auto px-6 py-6 bg-neutral-800 text-neutral-200">
+					<Dialog.Panel className="fixed inset-0 z-30 w-full overflow-y-auto px-6 py-6 bg-neutral-800 text-neutral-200">
 						<div className="flex items-center justify-between">
-							<a href="#" className="-m-1.5 p-1.5">
+							<a href="/" className="-m-1.5 p-1.5">
 								<span className="sr-only">Your Company</span>
 								<img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
 							</a>
@@ -127,7 +127,7 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                         leaveTo="opacity-0">
                         <div className="block fixed inset-0 bg-neutral-500 bg-opacity-75 transition-opacity" onClick={handleClick} />
                 </Transition.Child>
-                <div className="fixed inset-0 overflow-hidden">
+                <div className="fixed inset-0 overflow-hidden z-30">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                             <Transition.Child
@@ -140,7 +140,7 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                                     leaveTo="translate-x-full">
                                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-neutral-700 text-neutral-200">
                                     <div className="flex items-center justify-between p-4">
-                                        <a href="#" className="-m-1.5 p-1.5">
+                                        <a href="/" className="-m-1.5 p-1.5">
                                             <span className="sr-only">Your Company</span>
                                             <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                                         </a>

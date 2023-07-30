@@ -42,8 +42,8 @@ export default function AboutSection(): ReactElement<FC> {
                         About Me
                     </animated.h1>
                 </div>
-                <div className='flex flex-row w-full justify-end pt-16 pr-16'>
-                    <article className="flex flex-col w-1/2 min-h-full justify-end">
+                <div className='flex flex-row w-full justify-center md:justify-end pt-16 pr-0 md:pr-16'>
+                    <article className="flex flex-col w-3/4 md:w-1/2 min-h-full justify-end">
                         <animated.div
                             className="transition-opacity transform-gpu ease-in"
                             style={contentSpringStyles}>
