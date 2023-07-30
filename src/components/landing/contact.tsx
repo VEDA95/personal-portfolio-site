@@ -53,7 +53,7 @@ export default function ContactSection(): ReactElement<FC> {
                 </div>
                 <div className="flex flex-col w-full mt-40 h-48">
                     <animated.div className="flex flex-col w-full items-center transition-opacity transform-gpu" style={contactSpringStyle}>
-                        <a href="#" className="w-40 text-2xl rounded-full bg-neutral-200 text-neutral-900 p-3 transition-colors ease-in hover:bg-dark-red hover:text-neutral-200">Contact Me</a>
+                        <a href="/contact" className="w-40 text-2xl rounded-full bg-neutral-200 text-neutral-900 p-3 transition-colors ease-in hover:bg-dark-red hover:text-neutral-200">Contact Me</a>
                         <span className="font-light pt-5 text-lg">Available from</span>
                         <span className="text-lg">9:00 AM - 9:00 PM EST.</span>
                     </animated.div>

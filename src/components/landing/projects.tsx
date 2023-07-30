@@ -5,15 +5,16 @@ import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'reac
 
 
 interface ProjectItemProps extends PropsWithChildren {
+    id: string;
     img_url?: string;
     heading: string;
     description?: string;
 }
 
-function ProjectItem({heading, description, children}: ProjectItemProps): ReactElement<FC> {
+function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
     return (
         <li className="flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md">
-            <a href="#">
+            <a href={`/projects/${id}`}>
                 <div className="block w-full h-60 bg-neutral-500" />
                 <div className="flex flex-row w-full justify-center pt-6">
                     <h2 className="font-bold text-3xl text-dark-red">{heading}</h2>
@@ -57,24 +58,24 @@ export default function ProjectsSection(): ReactElement<FC> {
                 <div className="flex flex-row w-full pt-16 justify-center">
                     <animated.div className="grid grid-cols-2 md:grid-cols-4 w-1/2 md:w-[75rem] gap-x-4 transition-opacity transform-gpu" style={sectionSpringStyle}>
                         <ul className="grid auto-rows-[25rem] gap-y-4">
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test1" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test2" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test3" heading="test" description="Lorem Ipsum..." />
                         </ul>
                         <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test4" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test5" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test6" heading="test" description="Lorem Ipsum..." />
                         </ul>
                         <ul className="grid auto-rows-[25rem] gap-y-4">
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test7" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test8" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test9" heading="test" description="Lorem Ipsum..." />
                         </ul>
                         <ul className="grid auto-rows-[25rem] gap-y-4 md:mt-10">
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test10" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test11" heading="test" description="Lorem Ipsum..." />
+                            <ProjectItem id="test12" heading="test" description="Lorem Ipsum..." />
                         </ul>
                     </animated.div>
                 </div>
