@@ -5,6 +5,7 @@ import HeroSection from '../components/landing/hero';
 import AboutSection from '../components/landing/about';
 import SkillsSection from '../components/landing/skills';
 import ProjectSection from '../components/landing/projects';
+import ContactSection from '../components/landing/contact';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -14,5 +15,6 @@ import ProjectSection from '../components/landing/projects';
 		<AboutSection client:visible />
 		<SkillsSection client:load />
 		<ProjectSection client:visible />
+		<ContactSection client:visible />
 	</main>
 </Layout>
