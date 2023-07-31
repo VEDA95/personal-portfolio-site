@@ -1,6 +1,8 @@
 import client from './directus';
-import { readSingleton } from '@directus/sdk';
+import { readSingleton, readItems } from '@directus/sdk';
 
 export default async function fetchLandingPageData(): Promise<any> {
-    return await client.request(readSingleton('landingpage'));
+    return await client.request(readSingleton('landingpage', {
+        fields: ['*', 'skills.*', 'projects.*']
+    }));
 }

@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useMemo } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
+import classNames from 'classnames';
 import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'react';
 
 
@@ -9,6 +10,22 @@ interface ProjectItemProps extends PropsWithChildren {
     img_url?: string;
     heading: string;
     description?: string;
+}
+
+interface IProjectSectionItem {
+    id: string;
+    date_created: string;
+    date_updated: string | null;
+    name: string;
+    longdescription: string | null;
+    shortdescription: string | null;
+    panelimg: string | null;
+    page_id: string | null;
+}
+
+type ProjectDataType = Array<IProjectSectionItem>;
+export interface ProjectProps {
+    data: ProjectDataType;
 }
 
 function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
@@ -27,7 +44,7 @@ function ProjectItem({ id, heading, description, children }: ProjectItemProps): 
     );
 }
 
-export default function ProjectsSection(): ReactElement<FC> {
+export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC> {
     const sectionSpringRef: MutableRefObject<any> = useRef(null);
     const [sectionSpringStyle, sectionSpringApi] = useSpring({
         translateY: '5rem',
@@ -42,6 +59,39 @@ export default function ProjectsSection(): ReactElement<FC> {
             });
         }, 2000);
     }, []);
+    const [columnData1, columnData2, columnData3, columnData4] = useMemo<Array<ProjectDataType>>(() => {
+        let output1: ProjectDataType = [];
+        let output2: ProjectDataType = [];
+        let output3: ProjectDataType = [];
+        let output4: ProjectDataType = [];
+
+        for(let index: number = 0; index < data.length; index++) {
+            const item: IProjectSectionItem = {...data[index]};
+
+            if(index % 2 === 0) {
+                if(output1.length === output3.length) {
+                    output1 = [...output1, item];
+                    continue;
+                }
+
+                output3 = [...output3, item];
+                continue;
+            }
+
+            if(output2.length === output4.length) {
+                output2 = [...output2, item];
+                continue;
+            }
+
+            output4 = [...output4, item];
+        }
+
+        return [output1, output2, output3, output4];
+    }, [data]);
+    const gridClasses = classNames('grid gap-x-4 w-3/4 md:w-[75rem] transition-opacity transform-gpu', {
+        'grid-cols-2 md:grid-cols-4': data.length >= 4,
+        'grid-flow-col auto-cols-[50%] md:auto-cols-[18.75rem] justify-center': data.length < 4
+    });
 
     useEffect(() => {
         return () => {
@@ -56,27 +106,51 @@ export default function ProjectsSection(): ReactElement<FC> {
                     <h1 className="text-6xl font-bold">Projects</h1>
                 </div>
                 <div className="flex flex-row w-full pt-16 justify-center">
-                    <animated.div className="grid grid-cols-2 md:grid-cols-4 w-3/4 md:w-[75rem] gap-x-4 transition-opacity transform-gpu" style={sectionSpringStyle}>
-                        <ul className="grid auto-rows-[25rem] gap-y-4">
-                            <ProjectItem id="test1" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test2" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test3" heading="test" description="Lorem Ipsum..." />
-                        </ul>
-                        <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
-                            <ProjectItem id="test4" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test5" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test6" heading="test" description="Lorem Ipsum..." />
-                        </ul>
-                        <ul className="grid auto-rows-[25rem] gap-y-4">
-                            <ProjectItem id="test7" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test8" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test9" heading="test" description="Lorem Ipsum..." />
-                        </ul>
-                        <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
-                            <ProjectItem id="test10" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test11" heading="test" description="Lorem Ipsum..." />
-                            <ProjectItem id="test12" heading="test" description="Lorem Ipsum..." />
-                        </ul>
+                    <animated.div className={gridClasses} style={sectionSpringStyle}>
+                        {columnData1.length > 0 ? (
+                            <ul className="grid auto-rows-[25rem] gap-y-4">
+                                {columnData1.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                    return (
+                                        <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name}>
+                                            <p>{item.shortdescription}</p>
+                                        </ProjectItem>
+                                    );
+                                })}
+                            </ul>
+                        ) : null}
+                        {columnData2.length > 0 ? (
+                            <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
+                                {columnData2.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                    return (
+                                        <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name}>
+                                            <p>{item.shortdescription}</p>
+                                        </ProjectItem>
+                                    );
+                                })}
+                            </ul>
+                        ) : null}
+                        {columnData3.length > 0 ? (
+                             <ul className="grid auto-rows-[25rem] gap-y-4">
+                                {columnData3.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                    return (
+                                        <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name}>
+                                            <p>{item.shortdescription}</p>
+                                        </ProjectItem>
+                                    );
+                                })}
+                            </ul>
+                        ) : null}
+                        {columnData4.length > 0 ? (
+                            <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
+                                {columnData4.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                    return (
+                                        <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name}>
+                                            <p>{item.shortdescription}</p>
+                                        </ProjectItem>
+                                    );
+                                })}
+                            </ul>
+                        ) : null}
                     </animated.div>
                 </div>
             </section>

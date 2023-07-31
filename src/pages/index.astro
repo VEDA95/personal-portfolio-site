@@ -8,6 +8,7 @@ import ProjectSection from '../components/landing/projects';
 import ContactSection from '../components/landing/contact';
 import fetchLandingPageData from '../data/landing';
 
+
 const data: any = await fetchLandingPageData();
 ---
 
@@ -16,8 +17,8 @@ const data: any = await fetchLandingPageData();
 		<ParticleBackground client:idle />
 		<HeroSection client:load />
 		<AboutSection data={data.aboutsection} client:visible />
-		<SkillsSection client:load />
-		<ProjectSection client:visible />
+		<SkillsSection data={data.skills} client:load />
+		<ProjectSection data={data.projects} client:visible />
 		<ContactSection client:visible />
 	</main>
 </Layout>
