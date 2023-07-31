@@ -6,13 +6,16 @@ import AboutSection from '../components/landing/about';
 import SkillsSection from '../components/landing/skills';
 import ProjectSection from '../components/landing/projects';
 import ContactSection from '../components/landing/contact';
+import fetchLandingPageData from '../data/landing';
+
+const data: any = await fetchLandingPageData();
 ---
 
 <Layout title="Welcome to Astro.">
 	<main class="row-span-6 relative">
 		<ParticleBackground client:idle />
 		<HeroSection client:load />
-		<AboutSection client:visible />
+		<AboutSection data={data.aboutsection} client:visible />
 		<SkillsSection client:load />
 		<ProjectSection client:visible />
 		<ContactSection client:visible />
