@@ -67,7 +67,7 @@ export default function SkillsSection(): ReactElement<FC> {
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
                 <div className="flex flex-col w-full items-center pt-20 md:pt-24">
-                    <ul className="grid grid-cols-2 md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] md:auto-rows-[15rem] gap-4 w-4/6 md:w-1/2 justify-center">
+                    <ul className="grid grid-cols-2 md:grid-cols-none md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] gap-4 w-4/6 md:w-1/2 justify-center">
                         {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} name="Hello" description="World" style={panelStyle} />)}
                     </ul>
                 </div>
