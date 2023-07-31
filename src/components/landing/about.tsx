@@ -1,9 +1,27 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef, useMemo } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 
-export default function AboutSection(): ReactElement<FC> {
+export interface ISectionBlock {
+    id: string;
+    type: string;
+    data: {
+        text: string;
+        level?: number;
+    },
+    tunes: {
+        alignment: any;
+    }
+}
+export interface AboutSectionProps {
+    data: {
+        time: number;
+        blocks: Array<ISectionBlock>;
+    };
+}
+
+export default function AboutSection({ data }: AboutSectionProps): ReactElement<FC> {
     const headingTimeRef: MutableRefObject<any> = useRef<any>(null);
     const contentTimeRef: MutableRefObject<any> = useRef<any>(null);
     const [headingSpringStyles, headingApi] = useSpring({
@@ -24,6 +42,12 @@ export default function AboutSection(): ReactElement<FC> {
             contentApi.start({translateY: '0', opacity: 100});
         }, 500);
     }, []);
+    const [header, content] = useMemo<[ISectionBlock | null, Array<ISectionBlock>]>(() => {
+        const header: ISectionBlock | undefined = data.blocks.find((item: ISectionBlock): boolean => item.type === 'header' && item.data.level === 1);
+        const content: Array<ISectionBlock> = data.blocks.filter((item: ISectionBlock): boolean => item.type !== 'header' || (item.type === 'header' && item.data.level !== 1));
+
+        return [header ?? null, content];
+    }, [data]);
 
     useEffect(() => {
         return () => {
@@ -39,7 +63,7 @@ export default function AboutSection(): ReactElement<FC> {
                     <animated.h1
                         className="font-bold text-6xl transform-gpu transition-opacity ease-in"
                         style={headingSpringStyles}>
-                        About Me
+                        {header?.data.text}
                     </animated.h1>
                 </div>
                 <div className='flex flex-row w-full justify-center md:justify-end pt-16 pr-0 md:pr-16'>
@@ -47,21 +71,11 @@ export default function AboutSection(): ReactElement<FC> {
                         <animated.div
                             className="transition-opacity transform-gpu ease-in"
                             style={contentSpringStyles}>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <p className="pt-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <p className="pt-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <p className="pt-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <p className="pt-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
+                            {content.map((item: ISectionBlock, index: number): ReactElement<FC> => {
+                                if(index === 0) return <p key={`about-content-para-${index + 1}`}>{item.data.text}</p>;
+
+                                return <p key={`about-content-para-${index + 1}`} className="pt-4">{item.data.text}</p>;
+                            })}
                         </animated.div>
                     </article>
                 </div>
