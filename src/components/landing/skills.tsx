@@ -5,6 +5,7 @@ import useMidState from '../../state/mid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
+import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
@@ -37,6 +38,9 @@ library.add(far)
 
 export function SkillPanel({icon, name, description, style = {}}: SkillPanelProps): ReactElement<FC> {
     const [mounted, setMount] = useState<boolean>(false);
+    const descriptionClasses: string = classNames('flex flex-row w-full justify-center', {
+        'mb-10': icon != null && mounted
+    });
 
     useEffect(() => {
         setMount(true);
@@ -48,14 +52,14 @@ export function SkillPanel({icon, name, description, style = {}}: SkillPanelProp
                 style={style}
                 className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity justify-center bg-neutral-900 hover:bg-neutral-800">
                     {icon != null && mounted ? (
-                        <div className="flex flex-row w-full justify-center">
-                            <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} />
+                        <div className="flex flex-row w-full justify-center pb-2">
+                            <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-8 h-8" />
                         </div>
                     ) : null}
                     <div className="flex flex-row w-full justify-center">
                         <h2 className="font-semibold text-dark-red text-4xl">{name}</h2>
                     </div>
-                    <div className="flex flex-row w-full justify-center">
+                    <div className={descriptionClasses}>
                         <p className="text-lg">{description}</p>
                     </div>
             </animated.div>

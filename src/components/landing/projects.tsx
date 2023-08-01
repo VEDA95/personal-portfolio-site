@@ -7,7 +7,7 @@ import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'reac
 
 interface ProjectItemProps extends PropsWithChildren {
     id: string;
-    img_url?: string;
+    img_id: string | null;
     heading: string;
     description?: string;
 }
@@ -28,11 +28,18 @@ export interface ProjectProps {
     data: ProjectDataType;
 }
 
-function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
+function ProjectItem({ id, heading, description, children, img_id }: ProjectItemProps): ReactElement<FC> {
     return (
         <li className="flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md transition-colors group duration-300 ease-in hover:cursor-pointer hover:bg-dark-red hover:text-neutral-200">
             <a href={`/projects/${id}`} className="w-full h-full">
-                <div className="block w-full h-60 bg-neutral-500 transition-colors duration-300 group-hover:bg-neutral-700 ease-in" />
+                {img_id != null ? (
+                    <div className="block w-full h-60 relative">
+                        <div className="block absolute inset-0 z-20 transition-opacity ease-in duration-300 bg-neutral-700 opacity-0 group-hover:opacity-75" />
+                        <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${img_id}`} className="w-full h-full" />
+                    </div>
+                ) : (
+                    <div className="block w-full h-60 bg-neutral-500 transition-colors duration-300 group-hover:bg-neutral-700 ease-in" />
+                )}
                 <div className="flex flex-row w-full justify-center pt-6">
                     <h2 className="font-bold text-3xl text-dark-red group-hover:text-neutral-200 transition-colors duration-300 ease-in">{heading}</h2>
                 </div>
@@ -111,7 +118,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                             <ul className="grid auto-rows-[25rem] gap-y-4">
                                 {columnData1.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name} img_id={item.panelimg}>
                                             <p>{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -122,7 +129,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                             <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
                                 {columnData2.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name} img_id={item.panelimg}>
                                             <p>{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -133,7 +140,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                              <ul className="grid auto-rows-[25rem] gap-y-4">
                                 {columnData3.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name} img_id={item.panelimg}>
                                             <p>{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -144,7 +151,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                             <ul className="grid auto-rows-[25rem] gap-y-4 mt-10">
                                 {columnData4.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name} img_id={item.panelimg}>
                                             <p>{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
