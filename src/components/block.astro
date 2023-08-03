@@ -1,0 +1,76 @@
+---
+import classNames from 'classnames';
+
+export interface Props {
+    blocks: Array<any>;
+    widthClass?: string;
+}
+
+const {blocks, widthClass}: Props = Astro.props;
+const containerClasses: string = widthClass != null ? `flex flex-col ${widthClass}` : 'flex flex-col w-full'
+---
+
+<div class={containerClasses}>
+    {blocks.map((item: any): HTMLElement => {
+        if(item.type === 'header') {
+            const headingClasses: string = classNames('font-bold pb-10', {
+                'text-center': item.tunes.alignment.alignment === 'center',
+                'text-right': item.tunes.alignment.alignment === 'right',
+                'text-6xl': item.data.level === 1,
+                'text-5xl': item.data.level === 2,
+                'text-4xl': item.data.level === 3,
+                'text-3xl': item.data.level === 4,
+                'text-2xl': item.data.level === 5,
+                'text-xl': item.data.level === 6,
+            });
+
+            if(item.data.level === 1) return <h1 class={headingClasses}>{item.data.text}</h1>;
+            if(item.data.level === 2) return <h2 class={headingClasses}>{item.data.text}</h2>;
+            if(item.data.level === 3) return <h3 class={headingClasses}>{item.data.text}</h3>;
+            if(item.data.level === 4) return <h4 class={headingClasses}>{item.data.text}</h4>;
+            if(item.data.level === 5) return <h5 class={headingClasses}>{item.data.text}</h5>;
+            if(item.data.level === 6) return <h6 class={headingClasses}>{item.data.text}</h6>;
+        }
+
+        if(item.type === 'quote') {
+            const quoteClasses: string = classNames('p-4 mb-4 border-l-4 border-neutral-700 bg-crimson-red rounded-lg', {
+                'text-center': item.data.alignment === 'center',
+                'text-right': item.data.alignment === 'right'
+            });
+
+            return (
+                <blockquote class={quoteClasses}>
+                    <p class="text-xl italic font-medium leading-relaxed">{item.data.text}</p>
+                </blockquote>
+            );
+        }
+
+        if(item.type === 'nestedlist') {
+            const listItems: any = item.data.items.map((content: any) => {
+                return <li>{content.content}</li>;
+            });
+
+            if(item.data.style === 'unordered') return <ul class="pb-5 list-disc ml-5">{listItems}</ul>;
+            if(item.data.style === 'ordered') return <ol class="pb-5 list-decimal ml-5">{listItems}</ol>;
+        }
+
+        if(item.type === 'code') {
+            return <code class="block whitespace-pre p-4 mb-5 bg-neutral-700 border border-solid border-neutral-500 rounded-lg">{item.data.code}</code>;
+        }
+
+        if(item.type === 'image') {
+            return <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}${item.data.file.url}`}
+                        alt={item.data.caption ?? ''}
+                        width={`${item.data.file.width}`}
+                        height={`${item.data.file.height}`}
+                        class="w-1/2 h-1/2 rounded-lg pb-5" />;
+        }
+
+        const textClasses: string = classNames('pb-5', {
+            'text-center': item.tunes.alignment.alignment === 'center',
+            'text-right': item.tunes.alignment.alignment === 'right'
+        });
+
+        return <p class={textClasses} set:html={item.data.text} />;
+    })}
+</div>
