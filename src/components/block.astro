@@ -59,11 +59,15 @@ const containerClasses: string = widthClass != null ? `flex flex-col ${widthClas
         }
 
         if(item.type === 'image') {
-            return <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}${item.data.file.url}`}
+            return (
+                <div class="flex flex-row w-full justify-center mb-5">
+                    <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}${item.data.file.url}`}
                         alt={item.data.caption ?? ''}
                         width={`${item.data.file.width}`}
                         height={`${item.data.file.height}`}
-                        class="w-1/2 h-1/2 rounded-lg pb-5" />;
+                        class="aspect-auto rounded-2xl overflow-hidden" />
+                </div>
+            );
         }
 
         const textClasses: string = classNames('pb-5', {
