@@ -46,8 +46,8 @@ const containerClasses: string = widthClass != null ? `flex flex-col ${widthClas
         }
 
         if(item.type === 'nestedlist') {
-            const listItems: any = item.data.items.map((content: any) => {
-                return <li>{content.content}</li>;
+            const listItems: any = item.data.items.map((elem: any): HTMLElement => {
+                return <li>{elem.content}</li>;
             });
 
             if(item.data.style === 'unordered') return <ul class="pb-5 list-disc ml-5">{listItems}</ul>;
