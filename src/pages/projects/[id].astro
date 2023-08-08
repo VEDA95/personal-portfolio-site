@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/base.astro';
+import Block from '../../components/block.astro';
+import { fetchProject } from '../../data/projects';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/pro-regular-svg-icons';
+
+const { id } = Astro.params;
+const data: any = await fetchProject(id as string);
+---
+
+<Layout title="Stefan's Corner - Projects">
+    <main class="row-span-6 relative">
+        <div class="flex flex-col w-full items-center">
+            <div class="flex flex-row px-8 w-full">
+                <a href="/projects" class="text-sm transition-colors duration-300 hover:text-dark-red">
+                    <FontAwesomeIcon icon={faChevronLeft} client:idle />
+                    <span>Back to Projects page</span>
+                </a>
+            </div>
+            <div class="flex flex-row w-full justify-center pt-16 pb-8">
+                <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.panelimg}`} class="aspect-auto overflow-hidden rounded-2xl w-[50rem] h-full" />
+            </div>
+            <div class="flex flex-row w-full justify-center">
+                <h1 class="font-bold text-6xl py-10">{data.name}</h1>
+            </div>
+            <Block widthClass="w-3/5" blocks={data.content.blocks} />
+        </div>
+    </main>
+</Layout>

@@ -21,7 +21,7 @@ export default function ProjectsList({ data }: ProjectsListProps): ReactElement<
                 opacity: 100,
                 translateY: '0'
             });
-        }, 2500);
+        }, 1500);
     }, []);
 
     useEffect(() => {
