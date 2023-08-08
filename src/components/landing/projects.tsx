@@ -11,7 +11,7 @@ interface ProjectItemProps extends PropsWithChildren {
     description?: string;
 }
 
-function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
+export function ProjectItem({ id, heading, description, children }: ProjectItemProps): ReactElement<FC> {
     return (
         <li className="flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md transition-colors group duration-300 ease-in hover:cursor-pointer hover:bg-dark-red hover:text-neutral-200">
             <a href={`/projects/${id}`} className="w-full h-full">
