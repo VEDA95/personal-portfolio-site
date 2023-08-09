@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/base.astro';
+import Block from '../components/block.astro';
+import ContactForm from '../components/contact';
+import fetchContactPageData from '../data/contact';
+
+const data: any = await fetchContactPageData();
+---
+
+<Layout title="Stefan's Corner - Contact">
+    <main class="row-span-6 relative">
+        <div class="flex flex-row w-full justify-center">
+            <div class="flex flex-col w-1/2 px-12">
+                <div class="flex flex-row w-full justify-center">
+                    <h1 class="text-6xl font-bold py-10">{data.heading}</h1>
+                </div>
+                <div class="flex flex-row w-full">
+                    <Block blocks={data.content.blocks} />
+                </div>
+                <div class="flex flex-col w-full items-center pt-10">
+                    <span class="font-light text-lg">Available from</span>
+                    <span class="text-lg">9:00 AM - 9:00 PM EST.</span>
+                </div>
+            </div>
+            <ContactForm widthClass='w-1/2' client:idle />
+        </div>
+    </main>
+</Layout>
