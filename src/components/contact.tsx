@@ -7,16 +7,16 @@ export interface ContactFormProps {
 }
 
 interface IFormTextState {
-	'first-name': string;
-	'last-name': string;
-	'email': string;
-	'company': string;
-	'budget': string;
-	'message': string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	company: string;
+	budget: string;
+	message: string;
 }
 
 export default function ContactForm({ widthClass }: ContactFormProps): ReactElement<FC> {
-	const [formData, setFormData] = useState<IFormTextState>({'first-name': '', 'last-name': '', email: '', company: '', budget: '', message: ''});
+	const [formData, setFormData] = useState<IFormTextState>({firstName: '', lastName: '', email: '', company: '', budget: '', message: ''});
 	const [formServicesData, setFormServicesData] = useState<Array<string>>([]);
 	const formContainerClasses: string = classNames('flex flex-col justify-center min-h-[calc(100vh_-_7rem)]', {
 		'w-full': widthClass == null || widthClass?.length === 0,
@@ -50,9 +50,9 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						<div className="mt-2.5">
 							<input
 								type="text"
-								name="first-name"
+								name="firstName"
 								id="first-name"
-								value={formData['first-name']}
+								value={formData.firstName}
 								onChange={handleTextChange}
 								className="block w-full rounded-md border-0 px-3.5 py-2 bg-neutral-800 placeholder:text-neutral-400 shadow-sm ring-1 ring-inset ring-neutral-400 focus:ring-2 focus:ring-dark-red sm:text-sm sm:leading-6"
 							/>
@@ -66,8 +66,8 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 							<input
 								type="text"
 								name="last-name"
-								id="last-name"
-								value={formData['last-name']}
+								id="lastName"
+								value={formData.lastName}
 								onChange={handleTextChange}
 								autoComplete="family-name"
 								className="block w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-1 ring-inset bg-neutral-800 ring-neutral-400 placeholder:text-neutral-400 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dark-red sm:text-sm sm:leading-6"

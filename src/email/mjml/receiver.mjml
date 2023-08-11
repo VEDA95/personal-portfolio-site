@@ -1,0 +1,79 @@
+<mjml>
+    <mj-head>
+        <mj-font name="Chivo" href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap" />
+    </mj-head>
+    <mj-body background-color="#171717">
+        <mj-include path="./components/header.mjml" />
+        <mj-section>
+            <mj-column width="100%">
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif" align="center">
+                    Somebody has sent you an email through the contact form on
+                    <a href="https://stefanscorner.com" style="color: #980404;">stefanscorner.com</a>
+                </mj-text>
+            </mj-column>
+            <mj-column width="75%">
+                 <mj-text color="#e5e5e5" font-family="Chivo, sans-serif"  padding-top="10%">
+                    <span style="font-weight: 600;">IP Address:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= ipAddress %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">User Agent:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= userAgent %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Date:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= date %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">First Name:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= firstName %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Last Name:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= lastName %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Email:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= email %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Company:</span>
+                    <span style="padding-left: 1.5%;">
+                        <%= company %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Budget:</span>
+                    <span style="padding-left: 1.5%;">
+                         <%= budget %>
+                    </span>
+                </mj-text>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600;">Services:</span>
+                    <span style="padding-left: 1.5%;">
+                         <%= services.join(', '); %>
+                    </span>
+                </mj-text>
+                 <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
+                    <span style="font-weight: 600; width: 100%;">Message:</span>
+                    <p style="width: 100%; padding: 3.5% 0 0 7%;">
+                        <%= message %>
+                    </p>
+                </mj-text>
+            </mj-column>
+        </mj-section>
+        <mj-include path="./components/footer.mjml" />
+    </mj-body>
+</mjml>

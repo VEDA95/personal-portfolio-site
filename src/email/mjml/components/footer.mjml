@@ -1,0 +1,7 @@
+<mj-section>
+    <mj-column>
+        <mj-text color="#e5e5e5" font-family="Chivo, sans-serif" align="center">
+            &copy; Copyright 2023
+        </mj-text>
+    </mj-column>
+</mj-section>

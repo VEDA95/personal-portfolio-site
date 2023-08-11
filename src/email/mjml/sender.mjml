@@ -1,0 +1,16 @@
+<mjml>
+    <mj-head>
+        <mj-font name="Chivo" href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap" />
+    </mj-head>
+    <mj-body background-color="#171717">
+        <mj-include path="./components/header.mjml" />
+        <mj-section>
+            <mj-column>
+                <mj-text color="#e5e5e5" font-family="Chivo, sans-serif" line-height="175%">
+                    The contact form email sent through <a href="https://stefanscorner.com" style="color: #980404;">stefanscorner.com</a> has been received! You should receive a reply to your email as soon as possible.
+                </mj-text>
+            </mj-column>
+        </mj-section>
+        <mj-include path="./components/footer.mjml" />
+    </mj-body>
+</mjml>
