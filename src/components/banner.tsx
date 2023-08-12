@@ -32,9 +32,9 @@ export default function Banner(): ReactElement<FC> {
 				enter="transition-opacity transform-gpu duration-75"
 				enterFrom="opacity-0 -translate-y-3"
 				enterTo="opacity-100 translate-y-0"
-				leave="transition-opacity transform-gpu duration-75"
+				leave="transition transform-gpu duration-75"
 				leaveFrom="opacity-100 scale-100"
-				leaveTo="opacity-0 scale-50"
+				leaveTo="opacity-0 scale-95"
 			>
 				<div className={bannerClasses}>
 					<p className="text-sm leading-6 line-clamp-1">{message}</p>
