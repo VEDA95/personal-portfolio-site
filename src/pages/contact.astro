@@ -2,6 +2,7 @@
 import Layout from '../layouts/base.astro';
 import Block from '../components/block.astro';
 import ContactForm from '../components/contact';
+import Banner from '../components/banner';
 import fetchContactPageData from '../data/contact';
 
 const data: any = await fetchContactPageData();
@@ -9,6 +10,7 @@ const data: any = await fetchContactPageData();
 
 <Layout title="Stefan's Corner - Contact">
     <main class="row-span-6 relative">
+        <Banner client:idle />
         <div class="flex flex-row w-full justify-center">
             <div class="flex flex-col w-1/2 px-12">
                 <div class="flex flex-row w-full justify-center">
