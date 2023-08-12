@@ -47,7 +47,7 @@ interface FormFieldProps {
 	id: string;
 	containerClassName?: string;
 	error: IGenericError | null;
-	labelValue: string;
+	labelValue: string | ReactElement<FC>;
 }
 
 type FormServiceDataType = IFormField<Array<string>>;
@@ -254,7 +254,12 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						id="company"
 						name="company"
 						key="contact-field-4"
-						labelValue="Company"
+						labelValue={(
+							<>
+								Company
+								<span className="pl-1 text-xs text-neutral-500 italic">&#40;Optional&#41;</span>
+							</>
+						)}
 						value={formData.company.value}
 						error={formData.company.error}
 						onChange={handleTextChange}
