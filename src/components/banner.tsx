@@ -19,15 +19,16 @@ export default function Banner(): ReactElement<FC> {
 		setOpen(false);
 		clearMessage();
 	}, [bannerType]);
-    const bannerClasses: string = classNames('pointer-events-auto flex flex-row items-center justify-between gap-x-6 px-6 py-2.5 overflow-hidden sm:rounded-xl sm:py-3 sm:pl-4 sm:pr-3.5 w-[35rem] h-12', {
+    const bannerClasses: string = classNames('pointer-events-auto flex flex-row items-center justify-between gap-x-6 overflow-hidden rounded-xl py-3 pl-4 pr-3.5 w-[35rem] h-12 md:px-6 md:py-2.5', {
         'bg-amber-500': bannerType === 'error',
         'bg-dark-red': bannerType === 'success'
     });
 
 	return (
 		<Transition show={open} as={Fragment}>
-			<div className="pointer-events-none absolute inset-x-0 top-0 sm:flex sm:justify-center sm:px-6 sm:pb-5 lg:px-8 h-14">
+			<div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center px-6 pb-5 lg:px-8 h-14">
 				<Transition.Child
+					as={Fragment}
 					enter="transition duration-300"
 					enterFrom="transform-gpu opacity-0 -translate-y-3"
 					enterTo="transform-gpu opacity-100 translate-y-0"

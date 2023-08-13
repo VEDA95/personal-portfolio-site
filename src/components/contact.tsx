@@ -81,7 +81,7 @@ const initFormDataState: IFormTextState = {
 
 const initFormServicesData: FormServiceDataType = {value: [], error: null};
 
-function FormFieldInput({value, onChange, disabled, name, id, labelValue, error, containerClassName = 'sm:col-span-2'}: FormFieldProps): ReactElement<FC> {
+function FormFieldInput({value, onChange, disabled, name, id, labelValue, error, containerClassName = 'col-span-2'}: FormFieldProps): ReactElement<FC> {
 	const inputClasses: string = classNames('block w-full rounded-md border-0 px-3.5 py-2 bg-neutral-800 placeholder:text-neutral-400 shadow-sm ring-inset focus:ring-2 focus:ring-dark-red sm:text-sm sm:leading-6 disabled:bg-neutral-600', {
 		'ring-1 ring-neutral-400': error == null,
 		'ring-2 ring-amber-500': error != null
@@ -227,7 +227,7 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						name="firstName"
 						key="contact-field-1"
 						labelValue="First Name"
-						containerClassName="col-span-2 sm:col-span-1"
+						containerClassName="col-span-2 md:col-span-1"
 						value={formData.firstName.value}
 						error={formData.firstName.error}
 						onChange={handleTextChange}
@@ -237,7 +237,7 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						name="lastName"
 						key="contact-field-2"
 						labelValue="Last Name"
-						containerClassName="col-span-2 sm:col-span-1"
+						containerClassName="col-span-2 md:col-span-1"
 						value={formData.lastName.value}
 						error={formData.lastName.error}
 						onChange={handleTextChange}
@@ -291,8 +291,8 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						</div>
 					</div>
 					<div className="col-span-2 md:col-span-1">
-						<legend className="block text-sm font-semibold leading-6">Services</legend>
-                        <fieldset id="services" className="flex flex-row w-full flex-wrap gap-2 pt-2">
+						<legend className="block text-sm font-semibold leading-6 text-center md:text-left">Services</legend>
+                        <fieldset id="services" className="flex flex-row w-full justify-center flex-wrap gap-2 pt-2 md:justify-start">
                                 <div className="flex flex-col">
                                     <input
 										id="web-development"
@@ -373,7 +373,7 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 							{formServicesData.error != null ? <p className="text-xs font-light text-amber-500 line-clamp-1">{formServicesData.error.message}</p> : null}
 						</div>
 					</div>
-					<div className="sm:col-span-2">
+					<div className="col-span-2">
 						<label htmlFor="message" className="block text-sm font-semibold leading-6">
 							Message
 						</label>
@@ -392,7 +392,7 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-row justify-center w-full mt-10 pr-8">
+				<div className="flex flex-row justify-center w-full mt-10">
 					<button
 						type="submit"
 						disabled={processing}
