@@ -50,7 +50,7 @@ export function SkillPanel({icon, name, description, style = {}}: SkillPanelProp
         <li className="flex flex-col">
             <animated.div
                 style={style}
-                className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity justify-center bg-neutral-900 hover:bg-neutral-800">
+                className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity ease-in justify-center bg-neutral-900 hover:bg-neutral-800">
                     {icon != null && mounted ? (
                         <div className="flex flex-row w-full justify-center pb-2">
                             <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-8 h-8" />
@@ -73,9 +73,9 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
     const panelTimerRef: MutableRefObject<any> = useRef(null);
     const setLocation = useMidState((state) => state.setLocation);
     const [panelSpringTrail, panelApi] = useTrail(data.length ?? 0, {
-        transform: 'scale(0.5)',
+        transform: 'scale(0.95)',
         opacity: 0,
-        duration: 500
+        duration: 1500
     }, []);
     const handleEnter = useCallback(() => {
         panelTimerRef.current = setTimeout(() => {
@@ -103,8 +103,8 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
-                <div className="flex flex-col w-full items-center pt-20 md:pt-24">
-                    <ul className="grid grid-cols-2 md:grid-cols-none md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] gap-4 w-4/6 md:w-1/2 justify-center">
+                <div className="flex flex-col w-full items-center py-20 md:py-24">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-none md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] gap-4 w-3/5 sm:w-3/4 md:w-1/2 justify-center">
                         {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} icon={data[index].icon} name={data[index].name ?? ''} description={data[index].shortdescription ?? ''} style={panelStyle} />)}
                     </ul>
                 </div>

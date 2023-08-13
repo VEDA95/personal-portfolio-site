@@ -80,12 +80,12 @@ export default function HeroSection(): ReactElement<FC> {
                 <div className="flex flex-col w-3/4 justify-between">
                     <div className="flex flex-col w-full h-40 mt-52 items-center md:items-start justify-end">
                         <animated.h1
-                            className="font-bold text-6xl transform-gpu transition-opacity ease-in"
+                            className="font-bold text-3xl sm:text-5xl transform-gpu transition-opacity ease-in md:text-6xl"
                             style={headingSpringStyles}>
                             Stefan Netterfield
                         </animated.h1>
-                        <animated.div className="flex flex-col pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
-                            <h2 className="font-thin text-3xl">Dedicated FullStack Developer</h2>
+                        <animated.div className="flex flex-col pl-4 md:pl-8 transform-gpu transition-opacity ease-in" style={subHeadingSpringStyles}>
+                            <h2 className="font-thin text-xl sm:text-2xl md:text-3xl">Dedicated FullStack Developer</h2>
                             <div className="flex flex-row justify-center md:justify-start pt-1 opacity-90">
                                 <HireBadge />
                             </div>
