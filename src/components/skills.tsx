@@ -42,7 +42,7 @@ export function SkillPanel({ style, heading, icon, alignContent, content }: Skil
     }, []);
 
     return (
-        <animated.div className="flex flex-col w-full md:w-1/2 min-h-[20rem] p-8 bg-crimson-red overflow-hidden rounded-xl transition-opacity transform-gpu mb-20" style={style}>
+        <animated.div className="flex flex-col w-full md:w-1/2 min-h-[20rem] p-8 bg-crimson-red overflow-hidden rounded-xl transition-opacity transform-gpu mb-8 md:mb-20" style={style}>
             <div className={headingContainerClasses}>
                 {icon != null && mounted && alignContent === 'left' ? (
                     <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-12 h-12 pr-4" />
@@ -80,13 +80,13 @@ export default function SkillComponent({ skills }: SkillProps): ReactElement<FC>
                 opacity: 100,
                 translateX: '0'
             });
-        }, 2500);
+        }, 500);
         leftTimerRef.current = setTimeout(() => {
             righttApi.start({
                 opacity: 100,
                 translateX: '0'
             });
-        }, 2500);
+        }, 500);
     }, []);
 
     useEffect(() => {
@@ -98,7 +98,7 @@ export default function SkillComponent({ skills }: SkillProps): ReactElement<FC>
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <div className="flex flex-col w-full px-12 pt-60">
+            <div className="flex flex-col w-full px-6 md:px-12 pt-48 md:pt-60">
                 {skills.map((item: any, index: number): ReactElement<FC> => {
                     const isEven: boolean = index % 2 === 0;
                     const keyIndex: number = index + 1;
