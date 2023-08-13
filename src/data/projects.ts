@@ -15,6 +15,6 @@ export async function fetchProjects(): Promise<any> {
 
 export async function fetchProject(id: string): Promise<any> {
     return await client.request(readItem('projects', id, {
-        fields: ['*']
+        fields: ['*', 'panelimg.*']
     }));
 }

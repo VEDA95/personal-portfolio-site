@@ -19,12 +19,16 @@ const data: any = await fetchProject(id as string);
                 </a>
             </div>
             <div class="flex flex-row w-full justify-center pt-16 pb-8">
-                <img src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.panelimg}`} class="aspect-auto overflow-hidden rounded-2xl w-[50rem] h-full" />
+                <img
+                    src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.panelimg.id}`}
+                    width={data.panelimg.width}
+                    height={data.panelimg.height}
+                    class="aspect-auto overflow-hidden rounded-2xl w-4/5 h-4/5 md:w-1/2 md:h-1/2" />
             </div>
             <div class="flex flex-row w-full justify-center">
-                <h1 class="font-bold text-6xl py-10">{data.name}</h1>
+                <h1 class="font-bold text-5xl md:text-6xl py-10">{data.name}</h1>
             </div>
-            <Block widthClass="w-3/5" blocks={data.content.blocks} />
+            <Block widthClass="w-4/5 md:w-3/5" blocks={data.content.blocks} />
         </div>
     </main>
 </Layout>
