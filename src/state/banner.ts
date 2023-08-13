@@ -8,9 +8,10 @@ export interface IBannerState {
     type: TypeStateType;
     setMessage: (value: string) => void;
     setType: (value: TypeStateType) => void;
+    setOpen: (value: boolean) => void;
     clearMessage: () => void;
     clearType: () => void;
-    toggleOpen: () => void;
+    clearOpen: () => void;
 }
 
 const useBannerState = create<IBannerState>((set): IBannerState => ({
@@ -19,9 +20,10 @@ const useBannerState = create<IBannerState>((set): IBannerState => ({
     type: 'error',
     setMessage: (value: string): void => set((state: IBannerState): IBannerState => ({...state, message: value})),
     setType: (value: TypeStateType): void => set((state: IBannerState): IBannerState => ({...state, type: value})),
+    setOpen: (value: boolean): void => set((state: IBannerState): IBannerState => ({...state, open: value})),
     clearMessage: (): void => set((state: IBannerState): IBannerState => ({...state, message: null})),
     clearType: (): void => set((state: IBannerState): IBannerState => ({...state, type: 'error'})),
-    toggleOpen: (): void => set((state: IBannerState): IBannerState => ({...state, open: !state.open}))
+    clearOpen: (): void => set((state: IBannerState): IBannerState => ({...state, open: false}))
 }));
 
 export { useBannerState };

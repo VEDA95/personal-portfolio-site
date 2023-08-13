@@ -70,7 +70,7 @@ const initFormDataState: IFormTextState = {
 		error: null
 	},
 	budget: {
-		value: '',
+		value: '$500 - $1,000',
 		error: null
 	},
 	message: {
@@ -82,7 +82,7 @@ const initFormDataState: IFormTextState = {
 const initFormServicesData: FormServiceDataType = {value: [], error: null};
 
 function FormFieldInput({value, onChange, disabled, name, id, labelValue, error, containerClassName = 'sm:col-span-2'}: FormFieldProps): ReactElement<FC> {
-	const inputClasses: string = classNames('block w-full rounded-md border-0 px-3.5 py-2 bg-neutral-800 placeholder:text-neutral-400 shadow-sm ring-inset focus:ring-2 focus:ring-dark-red sm:text-sm sm:leading-6', {
+	const inputClasses: string = classNames('block w-full rounded-md border-0 px-3.5 py-2 bg-neutral-800 placeholder:text-neutral-400 shadow-sm ring-inset focus:ring-2 focus:ring-dark-red sm:text-sm sm:leading-6 disabled:bg-neutral-600', {
 		'ring-1 ring-neutral-400': error == null,
 		'ring-2 ring-amber-500': error != null
 	});
@@ -108,7 +108,7 @@ function FormFieldInput({value, onChange, disabled, name, id, labelValue, error,
 }
 
 export default function ContactForm({ widthClass }: ContactFormProps): ReactElement<FC> {
-	const [setMessage, setType, toggleOpen] = useBannerState((state) => [state.setMessage, state.setType, state.toggleOpen]);
+	const [setMessage, setType, setOpen, bannerType] = useBannerState((state) => [state.setMessage, state.setType, state.setOpen, state.type]);
 	const [formData, setFormData] = useState<IFormTextState>(initFormDataState);
 	const [formServicesData, setFormServicesData] = useState<FormServiceDataType>(initFormServicesData);
 	const [processing, setProcessing] = useState<boolean>(false);
@@ -116,17 +116,17 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 		'w-full': widthClass == null || widthClass?.length === 0,
 		[widthClass as string]: widthClass != null && widthClass.length > 0
 	});
-	const budgetClasses: string = classNames('block w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-inset bg-neutral-800 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dark-red sm:text-sm sm:leading-6', {
+	const budgetClasses: string = classNames('block w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-inset bg-neutral-800 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dark-red sm:text-sm sm:leading-6 disabled:bg-neutral-600', {
 		'ring-1 ring-neutral-400': formData.budget.error == null,
 		'ring-2 ring-amber-500': formData.budget.error != null
 	});
-	const messageClasses: string = classNames('block w-full resize-none overflow-y-auto overflow-x-hidden h-52 rounded-md border-0 px-3.5 py-2 shadow-sm ring-inset bg-neutral-800 placeholder:text-neutral-400 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dark-red sm:text-sm sm:leading-6', {
-		'ring-1 ring-neutral-400': formData.budget.error == null,
-		'ring-2 ring-amber-500': formData.budget.error != null
+	const messageClasses: string = classNames('block w-full resize-none overflow-y-auto overflow-x-hidden h-52 rounded-md border-0 px-3.5 py-2 shadow-sm ring-inset bg-neutral-800 placeholder:text-neutral-400 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dark-red sm:text-sm sm:leading-6 disabled:bg-neutral-600', {
+		'ring-1 ring-neutral-400': formData.message.error == null,
+		'ring-2 ring-amber-500': formData.message.error != null
 	});
 	const handleTextChange = useCallback((e: SyntheticEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
 		const {currentTarget: {name, value}} = e;
-		setFormData((state: IFormTextState): IFormTextState => ({...state, [name]: value}));
+		setFormData((state: IFormTextState): IFormTextState => ({...state, [name]: {...state[name as keyof IFormTextState], value: value}}));
 	}, []);
 	const handleServicesChange = useCallback((e: SyntheticEvent<HTMLInputElement>): void => {
 		const {currentTarget: {checked, name}} = e;
@@ -158,18 +158,17 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 			});
 			const json: IGenericResponse = await response.json();
 
-			console.log(json);
-
 			if(json.code === 200) {
 				setMessage(json.message as string);
 				setType('success');
-				toggleOpen();
+				setOpen(true);
 			}
 
 			if(json.code === 500) {
 				console.error(json.error);
+				if(bannerType !== 'error') setType('error');
 				setMessage(json.error as string);
-				toggleOpen();
+				setOpen(true);
 			}
 
 			if(json.code === 400) {
@@ -198,8 +197,9 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 					});
 				} else {
 					console.error(json.error);
+					if(bannerType !== 'error') setType('error');
 					setMessage(json.error as string);
-					toggleOpen();
+					setOpen(true);
 				}
 			} else {
 				setFormData(initFormDataState);
@@ -209,13 +209,14 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 		} catch(err: any) {
 			if(err != null) {
 				console.error(err);
+				if(bannerType !== 'error') setType('error');
 				setMessage(err);
-				toggleOpen();
+				setOpen(true);
 			}
 		}
 
 		setProcessing(false);
-	}, [formData, formServicesData]);
+	}, [formData, formServicesData, bannerType]);
 
 	return (
 		<div className={formContainerClasses}>
@@ -278,11 +279,11 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 								disabled={processing}
 								className={budgetClasses}
 							>
-								<option>$500 - $1,000</option>
-								<option>$1,000 - $2,000</option>
-								<option>$2,000 - $5,000</option>
-								<option>$5,000 - $10,000</option>
-								<option>$10,000 +</option>
+								<option key="budget-option-1">$500 - $1,000</option>
+								<option key="budget-option-2">$1,000 - $2,000</option>
+								<option key="budget-option-3">$2,000 - $5,000</option>
+								<option key="budget-option-4">$5,000 - $10,000</option>
+								<option key="budget-option-5">$10,000 +</option>
 							</select>
 						</div>
 						<div className="h-8 p-2">
@@ -395,10 +396,9 @@ export default function ContactForm({ widthClass }: ContactFormProps): ReactElem
 					<button
 						type="submit"
 						disabled={processing}
-						className="block w-36 rounded-md bg-neutral-200 text-neutral-900 px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm transition-colors duration-300 hover:bg-dark-red hover:text-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-red"
+						className="block w-36 rounded-md bg-neutral-200 text-neutral-900 px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm transition-colors duration-300 hover:bg-dark-red hover:text-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-red disabled:bg-dark-red  disabled:text-neutral-200 disabled:opacity-90"
 					>
-						Send Message !
-						{processing ? <FontAwesomeIcon icon={faSpinner} className="w-6 h-6 absolute top-4 right-0"  spinPulse /> : null}
+						{processing ? <FontAwesomeIcon icon={faSpinner} className="w-4 h-4 text-neutral-200"  spinPulse /> : 'Send Message!'}
 					</button>
 				</div>
 			</form>

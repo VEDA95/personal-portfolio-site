@@ -11,14 +11,22 @@ import type { DOMPurifyI } from 'dompurify';
 import type { DOMWindow } from 'jsdom';
 import type { Comment } from 'akismet-api';
 
+function customBudgetErrorMap(issue: z.ZodIssueOptionalMessage, ctx: z.ErrorMapCtx): {message: string} {
+    if(issue.code === z.ZodIssueCode.invalid_enum_value) return {
+        message: 'You must provide one of the budgets provided when sending a message...'
+    };
+
+    return { message: ctx.defaultError };
+}
+
 const validationModel = z.object({
-    firstName: z.string().nonempty().trim(),
-    lastName: z.string().nonempty().trim(),
-    email: z.string().email().trim(),
-    company: z.string().trim().optional(),
-    message: z.string().nonempty().trim(),
-    budget: z.enum(['$500 - $1,000', '$1,000 - $2,000', '$2,000 - $5,000', '$5,000 - $10,000', '$10,000+']),
-    services: z.enum(['web-development', 'web-design', 'sys-administration', 'network-administration', 'something-else']).array().min(1)
+    firstName: z.string({required_error: 'You must provide your first name...'}).nonempty('You must provide your first name...').trim(),
+    lastName: z.string({required_error: 'You must provide your last name...'}).nonempty('You must provide your last name...').trim(),
+    email: z.string().email('A valid email address is required...').trim(),
+    company: z.string().nonempty('You must provide a company name that is not empty...').trim().nullish(),
+    message: z.string({required_error: 'Please write a message to send!'}).nonempty('You must write a message that is not empty...').trim(),
+    budget: z.enum(['$500 - $1,000', '$1,000 - $2,000', '$2,000 - $5,000', '$5,000 - $10,000', '$10,000+'], {errorMap: customBudgetErrorMap}),
+    services: z.enum(['web-development', 'web-design', 'sys-administration', 'network-administration', 'something-else'], {required_error: 'Please select a valid service when sending message...'}).array().min(1, 'Please select at least one service when sending message...')
 }).strict();
 
 type validationType = z.infer<typeof validationModel>;
@@ -44,7 +52,7 @@ export async function post({ request, clientAddress }: APIContext): Promise<Resp
     const sanitizedCompany: string | null = validatedData.data.company != null ? DOMPurify.sanitize(validatedData.data.company) : null;
     const sanitizedMessage: string = DOMPurify.sanitize(validatedData.data.message);
     const now: Date = new Date();
-    const templatePath: string = resolve('../../email/mjml/dist');
+    const templatePath: string = resolve(`${import.meta.env.PROD ? './dist' : './src'}/email/mjml/dist`);
 
     try {
         const akisComment: Comment = {
@@ -76,7 +84,7 @@ export async function post({ request, clientAddress }: APIContext): Promise<Resp
                 from: sanitizedEmail,
                 to: import.meta.env.GMAIL_USER_NAME,
                 subject: 'A new email has been received from stefanscorner.com!',
-                text: await renderFile(resolve(templatePath, './receiver.ejs'), {
+                html: await renderFile(resolve(templatePath, './receiver.ejs'), {
                     ipAddress: clientAddress,
                     userAgent: request.headers.has('user-agent') ? request.headers.get('user-agent') as string : 'n/a',
                     date: now.toDateString(),
@@ -84,6 +92,7 @@ export async function post({ request, clientAddress }: APIContext): Promise<Resp
                     lastName: sanitizedLastName,
                     email: sanitizedEmail,
                     company: sanitizedCompany != null ? sanitizedCompany : 'n/a',
+                    message: sanitizedMessage,
                     budget: validatedData.data.budget,
                     services: validatedData.data.services
                 })
@@ -92,7 +101,7 @@ export async function post({ request, clientAddress }: APIContext): Promise<Resp
                 from: import.meta.env.GMAIL_USER_NAME,
                 to: sanitizedEmail,
                 subject: 'Your email to stefanscorner.com has been received!',
-                text: await renderFile(resolve(templatePath, './sender.ejs'))
+                html: await renderFile(resolve(templatePath, './sender.ejs'))
             })
         ]);
 
