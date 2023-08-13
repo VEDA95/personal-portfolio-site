@@ -207,7 +207,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                             </ul>
                         ) : null}
                         {columnData3.length > 0 ? (
-                             <ul className="grid auto-rows-[25rem] gap-y-4 md:mt-0">
+                             <ul className="grid auto-rows-[25rem] gap-y-4">
                                 {columnData3.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
                                         <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name} img_id={item.panelimg}>
