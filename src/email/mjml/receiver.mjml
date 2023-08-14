@@ -45,7 +45,9 @@
                 <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">
                     <span style="font-weight: 600;">Email:</span>
                     <span style="padding-left: 1.5%;">
-                        <%= email %>
+                        <a href="mailto:<%= email %>" style="color: #980404;">
+                             <%= email %>
+                        </a>
                     </span>
                 </mj-text>
                 <mj-text color="#e5e5e5" font-family="Chivo, sans-serif">

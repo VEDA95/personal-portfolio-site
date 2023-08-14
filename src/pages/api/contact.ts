@@ -52,7 +52,7 @@ export async function post({ request, clientAddress }: APIContext): Promise<Resp
     const sanitizedCompany: string | null = validatedData.data.company != null ? DOMPurify.sanitize(validatedData.data.company) : null;
     const sanitizedMessage: string = DOMPurify.sanitize(validatedData.data.message);
     const now: Date = new Date();
-    const templatePath: string = resolve(`${import.meta.env.PROD ? './dist' : './src'}/email/mjml/dist`);
+    const templatePath: string = resolve('./public/email_templates');
 
     try {
         const akisComment: Comment = {

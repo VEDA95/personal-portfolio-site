@@ -188,6 +188,13 @@
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Chivo, sans-serif;font-size:13px;line-height:1;text-align:left;color:#e5e5e5;"><span style="font-weight: 600;">Date:</span>
+                          <span style="padding-left: 1.5%;"> <%= date %> </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                         <div style="font-family:Chivo, sans-serif;font-size:13px;line-height:1;text-align:left;color:#e5e5e5;"><span style="font-weight: 600;">First Name:</span>
                           <span style="padding-left: 1.5%;"> <%= firstName %> </span>
                         </div>
@@ -203,7 +210,9 @@
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                         <div style="font-family:Chivo, sans-serif;font-size:13px;line-height:1;text-align:left;color:#e5e5e5;"><span style="font-weight: 600;">Email:</span>
-                          <span style="padding-left: 1.5%;"> <%= email %> </span>
+                          <span style="padding-left: 1.5%;">
+                            <a href="mailto:<%= email %>" style="color: #980404;"> <%= email %> </a>
+                          </span>
                         </div>
                       </td>
                     </tr>
