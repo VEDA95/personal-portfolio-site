@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/base.astro';
+import Block from '../components/block.astro';
+import SkillComponent from '../components/skills';
+import { fetchSkillPageData, fetchSkills } from '../data/skills';
+
+const [pageData, skillData]: Array<any> = await Promise.allSettled([
+    fetchSkillPageData(),
+    fetchSkills()
+]);
+---
+
+<Layout title="Stefan's Corner - Skills">
+    <main class="row-span-6 relative">
+        <div class="flex flex-col w-full items-center">
+            <div class="flex flex-row w-full justify-center">
+                <h1 class="font-bold text-6xl py-10">{pageData.value.heading}</h1>
+            </div>
+            <Block widthClass="w-4/5 md:w-3/5" blocks={pageData.value.content.blocks} />
+            <SkillComponent skills={skillData.value} client:load />
+        </div>
+    </main>
+</Layout>
