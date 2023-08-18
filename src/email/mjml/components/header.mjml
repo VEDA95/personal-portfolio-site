@@ -1,0 +1,5 @@
+<mj-section>
+    <mj-column width="50%">
+        <mj-image width="64px" src="https://stefanscorner.dev/personal_site_logo_transparent_background.png" alt="Site Logo" />
+    </mj-column>
+</mj-section>
