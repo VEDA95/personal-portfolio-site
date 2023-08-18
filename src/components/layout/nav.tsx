@@ -23,10 +23,10 @@ export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
 	return (
         <div className="flex flex-col w-full h-20">
             <header className={navClasses}>
-                <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between p-6 lg:px-8" aria-label="Global">
-                    <a href="/" className="-m-1.5 p-1.5">
+                <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between py-2 px-6 lg:px-8" aria-label="Global">
+                    <a href="/" className="p-1.5">
                         <span className="sr-only">Your Company</span>
-                        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                        <img className="h-20 w-10 aspect-auto" src="/personal_site_logo_transparent_background.png" alt="" />
                     </a>
                     <div className="flex md:hidden">
                         <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
@@ -58,10 +58,10 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
                         leaveTo="opacity-0 scale-50">
 					<Dialog.Panel className="fixed inset-0 z-30 w-full overflow-y-auto px-6 py-6 bg-neutral-800 text-neutral-200">
 						<div className="flex items-center justify-between">
-							<a href="/" className="-m-1.5 p-1.5">
-								<span className="sr-only">Your Company</span>
-								<img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-							</a>
+                            <a href="/" className="p-1.5">
+                                <span className="sr-only">Your Company</span>
+                                <img className="h-20 w-10 aspect-auto" src="/personal_site_logo_transparent_background.png" alt="" />
+                            </a>
 							<button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
 								<span className="sr-only">Close menu</span>
 								<FontAwesomeIcon icon={faXmark} className="h-6 w-6" aria-hidden="true" />
