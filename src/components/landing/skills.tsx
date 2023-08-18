@@ -1,28 +1,65 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { animated, useTrail } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import useMidState from '../../state/mid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/pro-regular-svg-icons';
+import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
+import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export interface SkillPanelProps {
     name: string;
     description: string;
+    icon: string | null;
     style?: {
         [index: string]: any;
     }
 }
 
+interface ISkillSectionItem {
+    id: string;
+    date_created: string;
+    date_updated: string | null;
+    name: string;
+    icon: string | null;
+    category: string;
+    longdescription: string | null;
+    shortdescription: string | null;
+    page_id: string | null;
+}
 
-export function SkillPanel({name, description, style = {}}: SkillPanelProps): ReactElement<FC> {
+export interface SkillSectionProps {
+    data: Array<ISkillSectionItem>;
+}
+
+library.add(far)
+
+export function SkillPanel({icon, name, description, style = {}}: SkillPanelProps): ReactElement<FC> {
+    const [mounted, setMount] = useState<boolean>(false);
+    const descriptionClasses: string = classNames('flex flex-row w-full justify-center', {
+        'mb-10': icon != null && mounted
+    });
+
+    useEffect(() => {
+        setMount(true);
+    }, []);
+
     return(
         <li className="flex flex-col">
             <animated.div
                 style={style}
-                className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity justify-center bg-neutral-900 hover:bg-neutral-800">
+                className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity ease-in justify-center bg-neutral-900 hover:bg-neutral-800">
+                    {icon != null && mounted ? (
+                        <div className="flex flex-row w-full justify-center pb-2">
+                            <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-8 h-8" />
+                        </div>
+                    ) : null}
                     <div className="flex flex-row w-full justify-center">
                         <h2 className="font-semibold text-dark-red text-4xl">{name}</h2>
                     </div>
-                    <div className="flex flex-row w-full justify-center">
+                    <div className={descriptionClasses}>
                         <p className="text-lg">{description}</p>
                     </div>
             </animated.div>
@@ -31,14 +68,14 @@ export function SkillPanel({name, description, style = {}}: SkillPanelProps): Re
 }
 
 
-export default function SkillsSection(): ReactElement<FC> {
+export default function SkillsSection({ data }: SkillSectionProps): ReactElement<FC> {
     const sectionRef: MutableRefObject<any> = useRef(null);
     const panelTimerRef: MutableRefObject<any> = useRef(null);
     const setLocation = useMidState((state) => state.setLocation);
-    const [panelSpringTrail, panelApi] = useTrail(3, {
-        transform: 'scale(0.5)',
+    const [panelSpringTrail, panelApi] = useTrail(data.length ?? 0, {
+        transform: 'scale(0.95)',
         opacity: 0,
-        duration: 500
+        duration: 1500
     }, []);
     const handleEnter = useCallback(() => {
         panelTimerRef.current = setTimeout(() => {
@@ -66,9 +103,9 @@ export default function SkillsSection(): ReactElement<FC> {
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
-                <div className="flex flex-col w-full items-center pt-20 md:pt-24">
-                    <ul className="grid grid-cols-2 md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] md:auto-rows-[15rem] gap-4 w-4/6 md:w-1/2 justify-center">
-                        {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} name="Hello" description="World" style={panelStyle} />)}
+                <div className="flex flex-col w-full items-center py-20 md:py-24">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-none md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] gap-4 w-3/5 sm:w-3/4 md:w-1/2 justify-center">
+                        {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} icon={data[index].icon} name={data[index].name ?? ''} description={data[index].shortdescription ?? ''} style={panelStyle} />)}
                     </ul>
                 </div>
             </section>
