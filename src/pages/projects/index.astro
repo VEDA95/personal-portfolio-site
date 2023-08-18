@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/base.astro';
+import Block from '../../components/block.astro';
+import ProjectsList from '../../components/projects';
+import { fetchProjectPageData, fetchProjects } from '../../data/projects';
+
+const [pageData, projects]: Array<any> = await Promise.allSettled([
+    fetchProjectPageData(),
+    fetchProjects()
+]);
+---
+
+<Layout title="Stefan's Corner - Projects">
+    <main class="row-span-6 relative">
+        <div class="flex flex-col w-full items-center">
+            <div class="flex flex-row w-full justify-center">
+                <h1 class="font-bold text-4xl md:text-6xl py-10">{pageData.value.heading}</h1>
+            </div>
+            <Block widthClass="w-4/5 md:w-3/5" blocks={pageData.value.content.blocks} />
+            <ProjectsList data={projects.value} client:load />
+        </div>
+    </main>
+</Layout>
