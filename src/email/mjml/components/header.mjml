@@ -1,5 +1,5 @@
 <mj-section>
     <mj-column width="50%">
-        <mj-image width="64px" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Site Logo" />
+        <mj-image width="64px" src="https://stefanscorner.dev/personal_site_logo_transparent_background.png" alt="Site Logo" />
     </mj-column>
 </mj-section>
