@@ -1,0 +1,13 @@
+.docker
+.vscode
+node_modules
+.gitignore
+src
+dist
+.env.development
+pnpm-lock.yaml
+LICENSE
+postcss.config.cjs
+tailwind.config.cjs
+README.md
+tsconfig.json

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  stefanscornerFrontend:
+    image: docker.5f03.net/stefanscorner:latest
+    container_name: stefanscorner_frontend
+    restart: always
+    networks:
+      core_network_IPSec:
+        aliases:
+          - stefanscornerFrontend
+
+    environment:
+      TZ: "America/New_York"
+
+networks:
+  core_network_IPSec:
+    external: true

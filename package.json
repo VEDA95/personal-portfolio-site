@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "start_server": "node ./dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/image": "^0.17.2",
