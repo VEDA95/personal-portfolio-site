@@ -7,7 +7,7 @@ import image from '@astrojs/image';
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  integrations: [tailwind(), react(), image()],
+  integrations: [tailwind({applyBaseStyles: false}), react(), image()],
   adapter: node({
     mode: 'standalone'
   })

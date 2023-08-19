@@ -7,21 +7,21 @@ export interface Props {
 }
 
 const {blocks, widthClass}: Props = Astro.props;
-const containerClasses: string = widthClass != null ? `flex flex-col ${widthClass}` : 'flex flex-col w-full'
+const containerClasses: string = widthClass != null ? `flex flex-col ${widthClass} contentBlock` : 'flex flex-col w-full contentBlock'
 ---
 
 <div class={containerClasses}>
     {blocks.map((item: any): HTMLElement => {
         if(item.type === 'header') {
-            const headingClasses: string = classNames('font-bold pb-10', {
+            const headingClasses: string = classNames('font-bold pb-10 overflow-hidden', {
                 'text-center': item.tunes.alignment.alignment === 'center',
                 'text-right': item.tunes.alignment.alignment === 'right',
-                'text-6xl': item.data.level === 1,
-                'text-5xl': item.data.level === 2,
-                'text-4xl': item.data.level === 3,
-                'text-3xl': item.data.level === 4,
-                'text-2xl': item.data.level === 5,
-                'text-xl': item.data.level === 6,
+                'text-4xl md:text-6xl': item.data.level === 1,
+                'text-3xl md:text-5xl': item.data.level === 2,
+                'text-2xl md:text-4xl': item.data.level === 3,
+                'text-xl md:text-3xl': item.data.level === 4,
+                'text-lg md:text-2xl': item.data.level === 5,
+                'md:text-xl': item.data.level === 6,
             });
 
             if(item.data.level === 1) return <h1 class={headingClasses}>{item.data.text}</h1>;
@@ -47,7 +47,7 @@ const containerClasses: string = widthClass != null ? `flex flex-col ${widthClas
 
         if(item.type === 'nestedlist') {
             const listItems: any = item.data.items.map((elem: any): HTMLElement => {
-                return <li>{elem.content}</li>;
+                return <li set:html={elem.content} />;
             });
 
             if(item.data.style === 'unordered') return <ul class="pb-5 list-disc ml-5">{listItems}</ul>;

@@ -4,6 +4,7 @@ import { Waypoint } from 'react-waypoint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
@@ -24,7 +25,7 @@ export interface SkillPanelProps {
     alignContent: 'left' | 'right';
 }
 
-library.add(far);
+library.add(far, fab);
 
 export function SkillPanel({ style, heading, icon, alignContent, content }: SkillPanelProps): ReactElement<FC> {
     const [mounted, setMount] = useState<boolean>(false);
@@ -42,14 +43,14 @@ export function SkillPanel({ style, heading, icon, alignContent, content }: Skil
     }, []);
 
     return (
-        <animated.div className="flex flex-col w-full md:w-1/2 min-h-[20rem] p-8 bg-crimson-red overflow-hidden rounded-xl transition-opacity transform-gpu mb-8 md:mb-20" style={style}>
+        <animated.div className="flex flex-col w-full md:w-1/2 min-h-[20rem] p-8 bg-crimson-red overflow-hidden rounded-xl transition-opacity transform-gpu mb-8 md:mb-16" style={style}>
             <div className={headingContainerClasses}>
                 {icon != null && mounted && alignContent === 'left' ? (
-                    <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-12 h-12 pr-4" />
+                    <FontAwesomeIcon icon={icon as IconName} className="w-12 h-12 pr-4" />
                 ) : null}
                 <h2 className="font-bold text-4xl">{heading}</h2>
                 {icon != null && mounted && alignContent === 'right' ? (
-                    <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-12 h-12 pl-4" />
+                    <FontAwesomeIcon icon={icon as IconName} className="w-12 h-12 pl-4" />
                 ) : null}
             </div>
             {content != null ? (

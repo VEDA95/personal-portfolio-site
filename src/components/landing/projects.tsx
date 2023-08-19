@@ -49,7 +49,7 @@ export function ProjectItem({ id, heading, description, children, img_id, topMar
                 <div className="flex flex-row w-full justify-center pt-6">
                     <h2 className="font-bold text-3xl text-dark-red group-hover:text-neutral-200 transition-colors duration-300 ease-in">{heading}</h2>
                 </div>
-                <div className="flex flex-row w-full h-7 pt-3 px-3">
+                <div className="flex flex-row w-full pt-3 px-3">
                     {children != null ? children : <p>{description}</p>}
                 </div>
             </a>
@@ -164,7 +164,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
     }, [data, viewPortQuery]);
     const gridClasses = classNames('grid gap-x-4 w-3/4 sm:w-full md:w-[75rem] transition-opacity transform-gpu', {
         'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4': data.length >= 4,
-        'grid-cols-1 sm:grid-flow-col sm:auto-cols-[50%] md:auto-cols-[18.75rem] justify-center': data.length < 4
+        'grid-cols-1 sm:grid-cols-none sm:grid-flow-col sm:auto-cols-[50%] md:auto-cols-[18.75rem] justify-center': data.length < 4
     });
 
     useEffect(() => {
@@ -189,7 +189,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                                 {columnData1.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
                                         <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name} img_id={item.panelimg}>
-                                            <p>{item.shortdescription}</p>
+                                            <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
                                 })}
@@ -200,7 +200,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                                 {columnData2.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
                                         <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name} img_id={item.panelimg}>
-                                            <p>{item.shortdescription}</p>
+                                            <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
                                 })}
@@ -211,7 +211,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                                 {columnData3.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
                                         <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name} img_id={item.panelimg}>
-                                            <p>{item.shortdescription}</p>
+                                            <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
                                 })}
@@ -222,7 +222,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                                 {columnData4.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
                                     return (
                                         <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name} img_id={item.panelimg}>
-                                            <p>{item.shortdescription}</p>
+                                            <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
                                 })}

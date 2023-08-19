@@ -73,32 +73,27 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
                                     <li
 									    key="home"
 										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">Home</a>
+										<a href="/">Home</a>
 									</li>
                                     <li
 									    key="about"
 										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">About</a>
+										<a href="/about">About</a>
 									</li>
                                     <li
 									    key="skills"
 										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">Skills</a>
+										<a href="/skills">Skills</a>
 									</li>
                                     <li
 									    key="projects"
 										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">Projects</a>
+										<a href="/projects">Projects</a>
 									</li>
                                     <li
 									    key="contact"
 										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">Contact</a>
-									</li>
-                                    <li
-									    key="blog"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="#">Blog</a>
+										<a href="/contact">Contact</a>
 									</li>
 								</ul>
 							</div>

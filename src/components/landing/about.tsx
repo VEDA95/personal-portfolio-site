@@ -61,7 +61,7 @@ export default function AboutSection({ data }: AboutSectionProps): ReactElement<
             <section className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] justify-center mt-32 px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16 pl-0 md:pl-48 justify-center md:justify-start">
                     <animated.h1
-                        className="font-bold text-4xl transform-gpu transition-opacity ease-in"
+                        className="font-bold text-4xl md:text-6xl transform-gpu transition-opacity ease-in"
                         style={headingSpringStyles}>
                         {header?.data.text}
                     </animated.h1>

@@ -38,8 +38,8 @@ export default function ProjectsList({ data }: ProjectsListProps): ReactElement<
                     style={springStyles}>
                     {data.map((item: any, index: number): ReactElement<FC> => {
                         return (
-                            <ProjectItem key={`project-panel-${index + 1}`} heading={item.name} id={item.id} img_url={item.panelimg}>
-                                <p>{item.shortdescription}</p>
+                            <ProjectItem key={`project-panel-${index + 1}`} heading={item.name} id={item.id} img_id={item.panelimg}>
+                                <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                             </ProjectItem>
                         );
                     })}

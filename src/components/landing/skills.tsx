@@ -5,6 +5,7 @@ import useMidState from '../../state/mid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
@@ -34,13 +35,10 @@ export interface SkillSectionProps {
     data: Array<ISkillSectionItem>;
 }
 
-library.add(far)
+library.add(far, fab);
 
 export function SkillPanel({icon, name, description, style = {}}: SkillPanelProps): ReactElement<FC> {
     const [mounted, setMount] = useState<boolean>(false);
-    const descriptionClasses: string = classNames('flex flex-row w-full justify-center', {
-        'mb-10': icon != null && mounted
-    });
 
     useEffect(() => {
         setMount(true);
@@ -50,17 +48,17 @@ export function SkillPanel({icon, name, description, style = {}}: SkillPanelProp
         <li className="flex flex-col">
             <animated.div
                 style={style}
-                className="flex flex-col w-full h-full overflow-hidden rounded-lg transform-gpu transition-opacity ease-in justify-center bg-neutral-900 hover:bg-neutral-800">
+                className="flex flex-col w-full h-full justify-center overflow-hidden rounded-lg transform-gpu transition-opacity ease-in bg-neutral-900 hover:bg-neutral-800">
                     {icon != null && mounted ? (
                         <div className="flex flex-row w-full justify-center pb-2">
-                            <FontAwesomeIcon icon={{prefix: 'far', iconName: icon as IconName}} className="w-8 h-8" />
+                            <FontAwesomeIcon icon={icon as IconName} className="w-12 h-12" />
                         </div>
                     ) : null}
-                    <div className="flex flex-row w-full justify-center">
-                        <h2 className="font-semibold text-dark-red text-4xl">{name}</h2>
+                    <div className="flex flex-row w-full pb-2 justify-center">
+                        <h2 className="font-semibold text-dark-red text-2xl text-center">{name}</h2>
                     </div>
-                    <div className={descriptionClasses}>
-                        <p className="text-lg">{description}</p>
+                    <div className="flex flex-row w-full px-2 justify-center">
+                        <p className="line-clamp-4 text-center text-sm">{description}</p>
                     </div>
             </animated.div>
         </li>
@@ -83,7 +81,7 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
                 transform: 'scale(1.0)',
                 opacity: 100
             });
-        }, 2000);
+        }, 1000);
     }, []);
 
     useEffect(() => {
@@ -104,7 +102,7 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
                 <div className="flex flex-col w-full items-center py-20 md:py-24">
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-none md:grid-flow-col md:auto-cols-[15rem] auto-rows-[15rem] gap-4 w-3/5 sm:w-3/4 md:w-1/2 justify-center">
+                    <ul className="grid w-full grid-cols-[repeat(2,_50%)] md:grid-cols-[repeat(auto-fit,_15rem)] auto-rows-[15rem] gap-4 justify-center">
                         {panelSpringTrail.map((panelStyle, index) => <SkillPanel key={`panel-${index + 1}`} icon={data[index].icon} name={data[index].name ?? ''} description={data[index].shortdescription ?? ''} style={panelStyle} />)}
                     </ul>
                 </div>

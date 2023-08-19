@@ -45,13 +45,13 @@ export default function HeroSection(): ReactElement<FC> {
     const handleEnter = useCallback(() => {
         headingTimerRef.current = setTimeout(() => {
             headingApi.start({translateY: '-1.75rem', opacity: 100});
-        }, 2000);
+        }, 1000);
         subHeadingTimerRef.current = setTimeout(() => {
             subHeadingApi.start({translateY: '-1.5rem', opacity: 100});
-        }, 2500);
+        }, 1500);
         scrollButtonTimerRef.current = setTimeout(() => {
             scrollButtonApi.start({translateY: '2.5rem', opacity: 100});
-        }, 2500);
+        }, 1500);
     }, []);
 
     useEffect(() => {
