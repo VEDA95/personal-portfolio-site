@@ -3,7 +3,6 @@
 node_modules
 .gitignore
 src
-dist
 .env.development
 pnpm-lock.yaml
 LICENSE

@@ -30,7 +30,7 @@ export interface ProjectProps {
     data: ProjectDataType;
 }
 
-function ProjectItem({ id, heading, description, children, img_id, topMargin = false }: ProjectItemProps): ReactElement<FC> {
+export function ProjectItem({ id, heading, description, children, img_id, topMargin = false }: ProjectItemProps): ReactElement<FC> {
     const containerClasses: string = classNames('flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md transition-colors group duration-300 ease-in hover:cursor-pointer hover:bg-dark-red hover:text-neutral-200', {
         'mt-4 md:mt-10': topMargin
     });
