@@ -8,7 +8,7 @@
             <mj-column width="100%">
                 <mj-text color="#e5e5e5" font-family="Chivo, sans-serif" align="center">
                     Somebody has sent you an email through the contact form on
-                    <a href="https://stefanscorner.com" style="color: #980404;">stefanscorner.com</a>
+                    <a href="https://stefanscorner.dev" style="color: #980404;">stefanscorner.dev</a>
                 </mj-text>
             </mj-column>
             <mj-column width="75%">
