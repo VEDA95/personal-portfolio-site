@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
 import classNames from 'classnames';
 import useNavState from '../../state/nav';
-import type { ReactElement, FC, PropsWithChildren, JSX } from 'react';
+import type { ReactElement, FC, JSX } from 'react';
 
-interface MainNavProps extends PropsWithChildren {
+interface NavProps {
     navLinkList?: JSX.Element;
     siteIcon?: JSX.Element;
 }
 
-export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> {
+export function NavBar({navLinkList, siteIcon}: NavProps): ReactElement<FC> {
 	const [sticky, setOffCanvas] = useNavState((state) => [state.sticky, state.setOffCanvas]);
     const [hasMounted, setHasMounted] = useState<boolean>(false);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
@@ -19,6 +19,9 @@ export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> 
         'bg-transparent': !sticky || !hasMounted,
         'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)] z-20': sticky && hasMounted
     });
+
+    console.log(navLinkList);
+    console.log(siteIcon);
 
     useEffect(() => {
         setHasMounted(true);
@@ -45,9 +48,11 @@ export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> 
 	);
 }
 
-export function PrimaryOffCanvasMenu({ navLinkList, siteIcon }: MainNavProps): ReactElement<FC> {
+export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
 	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
+
+    console.log(props);
 
 	return (
 		<Transition.Root show={offCanvas} as={Fragment}>
@@ -64,8 +69,7 @@ export function PrimaryOffCanvasMenu({ navLinkList, siteIcon }: MainNavProps): R
 						<div className="flex items-center justify-between">
                             <a href="/" className="p-1.5">
                                 <span className="sr-only">Stefan's Corner</span>
-                                {siteIcon}
-                                <img className="h-20 w-10 aspect-auto" src="/personal_site_logo_transparent_background.png" alt="" />
+                                {props.siteIcon}
                             </a>
 							<button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
 								<span className="sr-only">Close menu</span>
@@ -74,7 +78,7 @@ export function PrimaryOffCanvasMenu({ navLinkList, siteIcon }: MainNavProps): R
 						</div>
 						<div className="mt-6 flow-root">
 							<div className="-my-6 divide-y divide-gray-500/10">
-                                {navLinkList}
+                                {props.navLinkList}
 							</div>
 						</div>
 					</Dialog.Panel>

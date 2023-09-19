@@ -40,10 +40,10 @@ const { title } = Astro.props;
 		<NavBar client:load>
 			<Image 
 				src={siteLogo}
-				slot="site-icon"
+				slot="siteIcon"
 				class="w-nav-logo h-nav-logo aspect-auto"
 				alt="Logo for portfolio website" />
-			<ul class="hidden md:flex md:gap-x-6 lg:gap-x-12" slot="nav-link-list">
+			<ul class="hidden md:flex md:gap-x-6 lg:gap-x-12" slot="navLinkList">
 				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
 					<a href="/">Home</a>
 				</li>
@@ -64,10 +64,10 @@ const { title } = Astro.props;
 		<PrimaryOffCanvasMenu client:media="(max-width: 768px)">
 			<Image 
 				src={siteLogo}
-				slot="site-icon"
+				slot="siteIcon"
 				class="w-nav-logo h-nav-logo aspect-auto"
 				alt="Logo for portfolio website" />
-			<ul class="space-y-2 py-6" slot="nav-link-list">
+			<ul class="space-y-2 py-6" slot="navLinkList">
 				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
 					<a href="/">Home</a>
 				</li>
