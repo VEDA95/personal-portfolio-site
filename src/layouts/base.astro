@@ -41,7 +41,7 @@ const { title } = Astro.props;
 			<Image 
 				src={siteLogo}
 				slot="site-icon"
-				class="w-[2.756rem] h-[7.275rem] aspect-auto"
+				class="w-nav-logo h-nav-logo aspect-auto"
 				alt="Logo for portfolio website" />
 			<ul class="hidden md:flex md:gap-x-6 lg:gap-x-12" slot="nav-link-list">
 				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
@@ -61,7 +61,30 @@ const { title } = Astro.props;
 				</li>
 			</ul>
 		</NavBar>
-		<PrimaryOffCanvasMenu client:media="(max-width: 768px)" />
+		<PrimaryOffCanvasMenu client:media="(max-width: 768px)">
+			<Image 
+				src={siteLogo}
+				slot="site-icon"
+				class="w-nav-logo h-nav-logo aspect-auto"
+				alt="Logo for portfolio website" />
+			<ul class="space-y-2 py-6" slot="nav-link-list">
+				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+					<a href="/">Home</a>
+				</li>
+				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+					<a href="/about">About</a>
+				</li>
+				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+					<a href="/skills">Skills</a>
+				</li>
+				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+					<a href="/projects">Projects</a>
+				</li>
+				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+					<a href="/contact">Contact</a>
+				</li>
+			</ul>
+		</PrimaryOffCanvasMenu>
 		<slot />
 		<footer class="flex flex-col md:flex-row justify-center md:justify-between mx-2 md:mx-4 p-6 lg:p-8">
 			<div class="flex flex-col w-full md:w-1/2 items-center md:items-start">

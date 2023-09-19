@@ -178,7 +178,7 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] items-center mt-32 px-6 pb-6 md:px-8 md:pb-8">
+            <section className="flex flex-col w-full min-h-landing-panel items-center mt-32 px-6 pb-6 md:px-8 md:pb-8">
                 <div className="flex flex-row w-full pt-16 justify-center md:justify-start">
                     <h1 className="text-6xl font-bold">Projects</h1>
                 </div>

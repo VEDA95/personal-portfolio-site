@@ -25,7 +25,7 @@ export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> 
     }, []);
 
 	return (
-        <div className="flex flex-col w-full h-20">
+        <div className="flex flex-col w-full h-[9.025rem]">
             <header className={navClasses}>
                 <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between py-2 px-6 lg:px-8" aria-label="Global">
                     <a href="/" className="p-1.5">
@@ -45,7 +45,7 @@ export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> 
 	);
 }
 
-export function PrimaryOffCanvasMenu(): ReactElement<FC> {
+export function PrimaryOffCanvasMenu({ navLinkList, siteIcon }: MainNavProps): ReactElement<FC> {
 	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
 
@@ -63,7 +63,8 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
 					<Dialog.Panel className="fixed inset-0 z-30 w-full overflow-y-auto px-6 py-6 bg-neutral-800 text-neutral-200">
 						<div className="flex items-center justify-between">
                             <a href="/" className="p-1.5">
-                                <span className="sr-only">Your Company</span>
+                                <span className="sr-only">Stefan's Corner</span>
+                                {siteIcon}
                                 <img className="h-20 w-10 aspect-auto" src="/personal_site_logo_transparent_background.png" alt="" />
                             </a>
 							<button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
@@ -73,33 +74,7 @@ export function PrimaryOffCanvasMenu(): ReactElement<FC> {
 						</div>
 						<div className="mt-6 flow-root">
 							<div className="-my-6 divide-y divide-gray-500/10">
-								<ul className="space-y-2 py-6">
-                                    <li
-									    key="home"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="/">Home</a>
-									</li>
-                                    <li
-									    key="about"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="/about">About</a>
-									</li>
-                                    <li
-									    key="skills"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="/skills">Skills</a>
-									</li>
-                                    <li
-									    key="projects"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="/projects">Projects</a>
-									</li>
-                                    <li
-									    key="contact"
-										className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-										<a href="/contact">Contact</a>
-									</li>
-								</ul>
+                                {navLinkList}
 							</div>
 						</div>
 					</Dialog.Panel>

@@ -76,7 +76,7 @@ export default function HeroSection(): ReactElement<FC> {
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={heroRef} className="flex flex-row w-full h-[calc(100vh_-_9.025rem)] justify-center px-6 md:px-8">
+            <section ref={heroRef} className="flex flex-row w-full min-h-landing-panel justify-center px-6 md:px-8">
                 <div className="flex flex-col w-3/4 justify-between">
                     <div className="flex flex-col w-full h-40 mt-52 items-center md:items-start justify-end">
                         <animated.h1
