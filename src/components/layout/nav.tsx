@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/pro-regular-svg-icons';
 import classNames from 'classnames';
 import useNavState from '../../state/nav';
-import type { ReactElement, FC, PropsWithChildren } from 'react';
+import type { ReactElement, FC, PropsWithChildren, JSX } from 'react';
 
+interface MainNavProps extends PropsWithChildren {
+    navLinkList?: JSX.Element;
+    siteIcon?: JSX.Element;
+}
 
-export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
+export function NavBar({navLinkList, siteIcon}: MainNavProps): ReactElement<FC> {
 	const [sticky, setOffCanvas] = useNavState((state) => [state.sticky, state.setOffCanvas]);
     const [hasMounted, setHasMounted] = useState<boolean>(false);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
@@ -25,8 +29,8 @@ export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
             <header className={navClasses}>
                 <nav className="mx-2 md:mx-4 flex flex-row items-center justify-between py-2 px-6 lg:px-8" aria-label="Global">
                     <a href="/" className="p-1.5">
-                        <span className="sr-only">Your Company</span>
-                        <img className="h-20 w-10 aspect-auto" src="/personal_site_logo_transparent_background.png" alt="" />
+                        <span className="sr-only">Stefan's Corner</span>
+                        {siteIcon}
                     </a>
                     <div className="flex md:hidden">
                         <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
@@ -34,7 +38,7 @@ export function NavBar({children}: PropsWithChildren): ReactElement<FC> {
                             <FontAwesomeIcon icon={faBars} className="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
-                    <ul className="hidden md:flex md:gap-x-6 lg:gap-x-12">{children}</ul>
+                    {navLinkList}
                 </nav>
             </header>
         </div>
