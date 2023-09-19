@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
