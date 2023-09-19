@@ -20,9 +20,6 @@ export function NavBar({navLinkList, siteIcon}: NavProps): ReactElement<FC> {
         'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)] z-20': sticky && hasMounted
     });
 
-    console.log(navLinkList);
-    console.log(siteIcon);
-
     useEffect(() => {
         setHasMounted(true);
     }, []);
@@ -51,8 +48,6 @@ export function NavBar({navLinkList, siteIcon}: NavProps): ReactElement<FC> {
 export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
 	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
-
-    console.log(props);
 
 	return (
 		<Transition.Root show={offCanvas} as={Fragment}>
