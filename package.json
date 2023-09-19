@@ -1,20 +1,19 @@
 {
   "name": "personal-portfolio-site",
   "type": "module",
-  "version": "0.0.3",
+  "version": "2.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --port 3000",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "start_server": "node ./dist/server/entry.mjs"
+    "start_server": "PORT=3000 node ./dist/server/entry.mjs"
   },
   "dependencies": {
-    "@astrojs/image": "^0.17.2",
-    "@astrojs/node": "^5.3.0",
-    "@astrojs/react": "^2.2.1",
-    "@astrojs/tailwind": "^4.0.0",
+    "@astrojs/node": "^6.0.0",
+    "@astrojs/react": "^3.0.2",
+    "@astrojs/tailwind": "^5.0.0",
     "@directus/sdk": "^11.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -33,7 +32,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "akismet-api": "^6.0.0",
-    "astro": "^2.8.0",
+    "astro": "^3.1.0",
     "classnames": "^2.3.2",
     "dompurify": "^3.0.5",
     "ejs": "^3.1.9",
