@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/base.astro';
 import Block from '../../components/block.astro';
 import { fetchProject } from '../../data/projects';
@@ -19,11 +20,12 @@ const data: any = await fetchProject(id as string);
                 </a>
             </div>
             <div class="flex flex-row w-full justify-center pt-16 pb-8">
-                <img
+                <Image
                     src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.panelimg.id}`}
                     width={data.panelimg.width}
                     height={data.panelimg.height}
-                    class="aspect-auto overflow-hidden rounded-2xl w-4/5 h-4/5 md:w-1/2 md:h-1/2" />
+                    alt={data.panelimg.caption ?? ''}
+                    class="aspect-auto overflow-hidden rounded-2xl w-4/5 h-4/5 md:w-1/3 md:h-1/3" />
             </div>
             <div class="flex flex-row w-full justify-center">
                 <h1 class="font-bold text-5xl md:text-6xl py-10">{data.name}</h1>

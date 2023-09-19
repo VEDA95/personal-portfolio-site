@@ -10,5 +10,8 @@ export default defineConfig({
   integrations: [tailwind({applyBaseStyles: false}), react()],
   adapter: node({
     mode: 'standalone'
-  })
+  }),
+  image: {
+    domains: ['localhost:3000', 'api.stefanscorner.dev']
+  }
 });
