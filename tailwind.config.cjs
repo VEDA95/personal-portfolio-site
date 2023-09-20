@@ -11,6 +11,15 @@ module.exports = {
 			colors: {
 				'dark-red': '#980404',
 				'crimson-red': '#491921'
+			},
+			width: {
+				'nav-logo': '2.756rem'
+			},
+			height: {
+				'nav-logo': '7.275rem'
+			},
+			minHeight: {
+				'landing-panel': 'calc(100vh - 9.025rem)'
 			}
 		},
 	},

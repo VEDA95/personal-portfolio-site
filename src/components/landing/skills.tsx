@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import classNames from 'classnames';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
@@ -97,7 +96,7 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={sectionRef} className="flex flex-col w-full min-h-[calc(100vh_-_7rem)] mt-32 bg-crimson-red px-6 md:px-8">
+            <section ref={sectionRef} className="flex flex-col w-full min-h-landing-panel mt-32 bg-crimson-red px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
