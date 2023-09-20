@@ -16,7 +16,7 @@ export function NavBar({navLinkList, siteIcon}: NavProps): ReactElement<FC> {
     const [hasMounted, setHasMounted] = useState<boolean>(false);
 	const handleClick = useCallback(() => setOffCanvas(true), []);
     const navClasses: string = classNames({
-        'bg-transparent': !sticky || !hasMounted,
+        'bg-transparent snap-start': !sticky || !hasMounted,
         'fixed inset-x-0 top-0 bg-[rgba(38,_38,_38,_0.6)] z-20': sticky && hasMounted
     });
 

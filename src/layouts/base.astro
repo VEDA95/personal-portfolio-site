@@ -38,67 +38,69 @@ const { title } = Astro.props;
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
-	<body class="grid grid-cols-1 grid-rows-[auto_auto_2fr] max-w-screen min-h-screen bg-neutral-800 text-neutral-200 font-sans">
-		<NavBar client:load>
-			<Image
-				src={siteLogo}
-				slot="siteIcon"
-				class="w-nav-logo h-nav-logo aspect-auto"
-				alt="Logo for portfolio website" />
-			<ul class="hidden md:flex md:gap-x-6 lg:gap-x-12" slot="navLinkList">
-				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
-					<a href="/">Home</a>
-				</li>
-				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
-					<a href="/about">About</a>
-				</li>
-				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
-					<a href="/skills">Skills</a>
-				</li>
-				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
-					<a href="/projects">Projects</a>
-				</li>
-				<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
-					<a href="/contact">Contact</a>
-				</li>
-			</ul>
-		</NavBar>
-		<PrimaryOffCanvasMenu client:media="(max-width: 768px)" transition:persist>
-			<Image
-				src={siteLogo}
-				slot="siteIcon"
-				class="w-nav-logo h-nav-logo aspect-auto"
-				alt="Logo for portfolio website" />
-			<ul class="space-y-2 py-6" slot="navLinkList">
-				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-					<a href="/">Home</a>
-				</li>
-				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-					<a href="/about">About</a>
-				</li>
-				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-					<a href="/skills">Skills</a>
-				</li>
-				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-					<a href="/projects">Projects</a>
-				</li>
-				<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-					<a href="/contact">Contact</a>
-				</li>
-			</ul>
-		</PrimaryOffCanvasMenu>
-		<slot />
-		<footer class="flex flex-col md:flex-row justify-center md:justify-between mx-2 md:mx-4 p-6 lg:p-8">
-			<div class="flex flex-col w-full md:w-1/2 items-center md:items-start">
-				<div class="my-2">
-					<HireBadge client:visible />
+	<body class="grid grid-cols-1 grid-rows-[auto_auto_2fr] bg-neutral-800 text-neutral-200 font-sans">
+		<div class="snap-y snap-mandatory w-screen h-screen overflow-y-scroll">
+			<NavBar client:load>
+				<Image
+					src={siteLogo}
+					slot="siteIcon"
+					class="w-nav-logo h-nav-logo aspect-auto"
+					alt="Logo for portfolio website" />
+				<ul class="hidden md:flex md:gap-x-6 lg:gap-x-12" slot="navLinkList">
+					<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
+						<a href="/">Home</a>
+					</li>
+					<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
+						<a href="/about">About</a>
+					</li>
+					<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
+						<a href="/skills">Skills</a>
+					</li>
+					<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
+						<a href="/projects">Projects</a>
+					</li>
+					<li class="text-sm font-semibold leading-6 transition-colors ease-linear hover:text-dark-red">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</NavBar>
+			<PrimaryOffCanvasMenu client:media="(max-width: 768px)" transition:persist>
+				<Image
+					src={siteLogo}
+					slot="siteIcon"
+					class="w-nav-logo h-nav-logo aspect-auto"
+					alt="Logo for portfolio website" />
+				<ul class="space-y-2 py-6" slot="navLinkList">
+					<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+						<a href="/">Home</a>
+					</li>
+					<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+						<a href="/about">About</a>
+					</li>
+					<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+						<a href="/skills">Skills</a>
+					</li>
+					<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+						<a href="/projects">Projects</a>
+					</li>
+					<li class="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</PrimaryOffCanvasMenu>
+			<slot />
+			<footer class="flex flex-col snap-end md:flex-row justify-center md:justify-between mx-2 md:mx-4 p-6 lg:p-8">
+				<div class="flex flex-col w-full md:w-1/2 items-center md:items-start">
+					<div class="my-2">
+						<HireBadge client:visible />
+					</div>
+					<span><span class="font-bold my-2 md:my-0">Hours</span>: 9AM - 9PM (EST.)</span>
+					<span class="font-thin my-2 md:my-0">&copy; Copyright 2023</span>
 				</div>
-				<span><span class="font-bold my-2 md:my-0">Hours</span>: 9AM - 9PM (EST.)</span>
-				<span class="font-thin my-2 md:my-0">&copy; Copyright 2023</span>
-			</div>
-			<div class="flex flex-col w-full md:w-1/2 justify-center md:justify-end my-2 md:my-0">
-				<SocialIcons client:visible />
-			</div>
-		</footer>
+				<div class="flex flex-col w-full md:w-1/2 justify-center md:justify-end my-2 md:my-0">
+					<SocialIcons client:visible />
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>

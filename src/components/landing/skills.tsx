@@ -96,7 +96,7 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={sectionRef} className="flex flex-col w-full min-h-landing-panel mt-32 bg-crimson-red px-6 md:px-8">
+            <section ref={sectionRef} className="flex flex-col snap-end w-full min-h-landing-panel mt-32 bg-crimson-red px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
