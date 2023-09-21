@@ -13,7 +13,7 @@ import fetchLandingPageData from '../data/landing';
 const data: any = await fetchLandingPageData();
 ---
 
-<Layout title="Stefan's Corner - Home">
+<Layout title="Stefan's Corner - Home" landingPage={true}>
 	<main class="row-span-6 relative">
 		<ParticleBackground client:idle />
 		<HeroSection client:load />

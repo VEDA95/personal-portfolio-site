@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { animated, useTrail } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
-import useMidState from '../../state/mid';
+import { useMidState } from '../../state/container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';

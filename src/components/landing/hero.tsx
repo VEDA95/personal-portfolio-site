@@ -3,7 +3,7 @@ import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
-import useNavState from '../../state/nav';
+import { useHeroState } from '../../state/container';
 import HireBadge from '../layout/hireBadge';
 import type {ReactElement, FC, MutableRefObject} from 'react';
 
@@ -12,7 +12,7 @@ export default function HeroSection(): ReactElement<FC> {
     const headingTimerRef: MutableRefObject<any> = useRef(null);
     const subHeadingTimerRef: MutableRefObject<any> = useRef(null);
     const scrollButtonTimerRef: MutableRefObject<any> = useRef(null);
-    const [sticky, setSticky] = useNavState((state) => [state.sticky, state.setSticky]);
+    const setLocation = useHeroState((state) => state.setLocation);
     const [headingSpringStyles, headingApi] = useSpring({
         translateY: '0',
         opacity: 0,
@@ -37,11 +37,6 @@ export default function HeroSection(): ReactElement<FC> {
             behavior: 'smooth'
         });
     }, []);
-    const handleScroll = useCallback(() => {
-        if(heroRef.current == null) return;
-        if((window.scrollY <= heroRef.current.clientHeight) && sticky) setSticky(false);
-        if((window.scrollY >= heroRef.current.clientHeight + 160) && !sticky) setSticky(true);
-    }, [sticky]);
     const handleEnter = useCallback(() => {
         headingTimerRef.current = setTimeout(() => {
             headingApi.start({translateY: '-1.75rem', opacity: 100});
@@ -55,9 +50,7 @@ export default function HeroSection(): ReactElement<FC> {
     }, []);
 
     useEffect(() => {
-        if(heroRef.current != null) {
-            if(window.scrollY > heroRef.current.clientHeight) setSticky(true);
-        }
+        if(heroRef.current != null) setLocation(heroRef.current.clientHeight);
 
         return () => {
             clearTimeout(headingTimerRef.current);
@@ -65,14 +58,6 @@ export default function HeroSection(): ReactElement<FC> {
             clearTimeout(scrollButtonTimerRef.current);
         };
     }, []);
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, {passive: true});
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [handleScroll]);
 
     return (
         <Waypoint onEnter={handleEnter}>
