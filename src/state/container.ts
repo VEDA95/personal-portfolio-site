@@ -12,6 +12,15 @@ export interface IMidState extends ILocationState {
     clearAlternate: () => void;
 }
 
+
+export type ScrollTypeValue = 'beginning' | 'about';
+
+export interface IScrollToState {
+    type: ScrollTypeValue | null;
+    setScrollType: (value: ScrollTypeValue) => void;
+    clearScrollType: () => void;
+}
+
 const useHeroState = create<ILocationState>((set) => ({
     location: null,
     setLocation: (value: number): void => set((state) => ({...state, location: value})),
@@ -27,4 +36,10 @@ const useMidState = create<IMidState>((set) => ({
     clearAlternate: (): void => set((state) => ({...state, showAlternate: false}))
 }));
 
-export { useMidState, useHeroState };
+const useScrollToState = create<IScrollToState>((set) => ({
+    type: null,
+    setScrollType: (value: ScrollTypeValue) => set((state) => ({...state, type: value})),
+    clearScrollType: () => set((state) => ({...state, type: null}))
+}));
+
+export { useMidState, useHeroState, useScrollToState };

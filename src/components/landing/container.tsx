@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useRef } from 'react';
 import useNavState from '../../state/nav';
-import { useHeroState, useMidState } from '../../state/container';
+import { useHeroState, useMidState, useScrollToState } from '../../state/container';
 import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'react';
 
 
@@ -9,6 +9,7 @@ export default function LandingPageContainer({ children }: PropsWithChildren): R
     const [sticky, setSticky] = useNavState((state) => [state.sticky, state.setSticky]);
     const heroLocation = useHeroState((state) => state.location);
     const [midLocation, showAlternate, setAlternate] = useMidState((state) => [state.location, state.showAlternate, state.setAlternate]);
+    const [scrollType, clearScrollType] = useScrollToState((state) => [state.type, state.clearScrollType]);
     const handleScroll = useCallback(() => {
         console.log(containerRef.current?.scrollTop);
         if(heroLocation == null || midLocation == null || containerRef.current == null) return;
@@ -31,6 +32,23 @@ export default function LandingPageContainer({ children }: PropsWithChildren): R
             containerRef.current.removeEventListener('scroll', handleScroll);
         };
     }, [handleScroll]);
+
+    useEffect(() => {
+        if(scrollType == null || containerRef.current == null || heroLocation == null) return;
+
+        if(scrollType === 'beginning') containerRef.current.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
+        });
+        if(scrollType === 'about') containerRef.current.scrollTo({
+            left: 0,
+            top: heroLocation,
+            behavior: 'smooth'
+        });
+
+        clearScrollType();
+    }, [scrollType]);
 
 
     return (

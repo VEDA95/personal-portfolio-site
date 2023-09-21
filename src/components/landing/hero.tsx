@@ -3,7 +3,7 @@ import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
-import { useHeroState } from '../../state/container';
+import { useHeroState, useScrollToState } from '../../state/container';
 import HireBadge from '../layout/hireBadge';
 import type {ReactElement, FC, MutableRefObject} from 'react';
 
@@ -13,6 +13,7 @@ export default function HeroSection(): ReactElement<FC> {
     const subHeadingTimerRef: MutableRefObject<any> = useRef(null);
     const scrollButtonTimerRef: MutableRefObject<any> = useRef(null);
     const setLocation = useHeroState((state) => state.setLocation);
+    const setScrollType = useScrollToState((state) => state.setScrollType);
     const [headingSpringStyles, headingApi] = useSpring({
         translateY: '0',
         opacity: 0,
@@ -28,15 +29,7 @@ export default function HeroSection(): ReactElement<FC> {
         opacity: 0,
         duration: 200
     }, []);
-    const handleClick = useCallback(() => {
-        if(heroRef.current == null) return;
-
-        window.scrollTo({
-            left: 0,
-            top: heroRef.current.clientHeight + 160,
-            behavior: 'smooth'
-        });
-    }, []);
+    const handleClick = useCallback(() => setScrollType('about'), []);
     const handleEnter = useCallback(() => {
         headingTimerRef.current = setTimeout(() => {
             headingApi.start({translateY: '-1.75rem', opacity: 100});
@@ -45,7 +38,7 @@ export default function HeroSection(): ReactElement<FC> {
             subHeadingApi.start({translateY: '-1.5rem', opacity: 100});
         }, 1500);
         scrollButtonTimerRef.current = setTimeout(() => {
-            scrollButtonApi.start({translateY: '2.5rem', opacity: 100});
+            scrollButtonApi.start({translateY: '2.0rem', opacity: 100});
         }, 1500);
     }, []);
 
