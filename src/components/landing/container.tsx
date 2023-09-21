@@ -11,7 +11,6 @@ export default function LandingPageContainer({ children }: PropsWithChildren): R
     const [midLocation, showAlternate, setAlternate] = useMidState((state) => [state.location, state.showAlternate, state.setAlternate]);
     const [scrollType, clearScrollType] = useScrollToState((state) => [state.type, state.clearScrollType]);
     const handleScroll = useCallback(() => {
-        console.log(containerRef.current?.scrollTop);
         if(heroLocation == null || midLocation == null || containerRef.current == null) return;
 
         const { current: { scrollTop } } = containerRef;
@@ -41,6 +40,7 @@ export default function LandingPageContainer({ children }: PropsWithChildren): R
             top: 0,
             behavior: 'smooth'
         });
+
         if(scrollType === 'about') containerRef.current.scrollTo({
             left: 0,
             top: heroLocation,
