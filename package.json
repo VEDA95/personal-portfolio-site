@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "start_server": "PORT=3000 node ./dist/server/entry.mjs"
+    "start_server": "node ./dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^6.0.0",
