@@ -45,7 +45,7 @@ export function NavBar({navLinkList, siteIcon}: NavProps): ReactElement<FC> {
 	);
 }
 
-export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
+export function PrimaryOffCanvasMenu({siteIcon, navLinkList}: NavProps): ReactElement<FC> {
 	const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
 
@@ -64,7 +64,7 @@ export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
 						<div className="flex items-center justify-between">
                             <a href="/" className="p-1.5">
                                 <span className="sr-only">Stefan's Corner</span>
-                                {props.siteIcon}
+                                {siteIcon}
                             </a>
 							<button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
 								<span className="sr-only">Close menu</span>
@@ -73,7 +73,7 @@ export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
 						</div>
 						<div className="mt-6 flow-root">
 							<div className="-my-6 divide-y divide-gray-500/10">
-                                {props.navLinkList}
+                                {navLinkList}
 							</div>
 						</div>
 					</Dialog.Panel>
@@ -83,7 +83,7 @@ export function PrimaryOffCanvasMenu(props: NavProps): ReactElement<FC> {
 	);
 }
 
-export function SecondaryOffCanvasMenu(): ReactElement<FC> {
+export function SecondaryOffCanvasMenu({ siteIcon, navLinkList }: NavProps): ReactElement<FC> {
     const [offCanvas, setOffCanvas] = useNavState((state) => [state.offCanvas, state.setOffCanvas]);
 	const handleClick = useCallback(() => setOffCanvas(false), []);
 
@@ -114,8 +114,8 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-neutral-700 text-neutral-200">
                                     <div className="flex items-center justify-between p-4">
                                         <a href="/" className="-m-1.5 p-1.5">
-                                            <span className="sr-only">Your Company</span>
-                                            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                                        <span className="sr-only">Stefan's Corner</span>
+                                        {siteIcon}
                                         </a>
                                         <button type="button" className="-m-2.5 rounded-md p-2.5 transition-colors ease-linear hover:text-dark-red" onClick={handleClick}>
                                             <span className="sr-only">Close menu</span>
@@ -124,28 +124,7 @@ export function SecondaryOffCanvasMenu(): ReactElement<FC> {
                                     </div>
                                     <div className="mt-6 flow-root">
                                         <div className="-my-6 divide-y divide-gray-500/10">
-                                            <ul className="space-y-2 py-6">
-                                                <li
-                                                    key="home"
-                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">Home</a>
-                                                </li>
-                                                <li
-                                                    key="tech"
-                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">Software / Tech</a>
-                                                </li>
-                                                <li
-                                                    key="after_hours"
-                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">After Hours</a>
-                                                </li>
-                                                <li
-                                                    key="return_to_site"
-                                                    className="-mx-3 block transition-colors ease-linear rounded-lg px-3 py-2 text-2xl text-center font-bold leading-7 hover:text-dark-red">
-                                                    <a href="#">Return to Site</a>
-                                                </li>
-                                            </ul>
+                                            {navLinkList}
                                         </div>
                                     </div>
                                 </Dialog.Panel>
