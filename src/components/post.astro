@@ -2,30 +2,33 @@
 import { Image } from 'astro:assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faHashtag } from '@fortawesome/pro-regular-svg-icons';
+import type { Blocks, Block } from '../data/types/block';
+import type { Image as PostImage } from '../data/types/image';
 
 export interface Props {
     id: string;
     date_created: string;
     title: string;
     category: string;
-    postimg?: any;
-    content: any;
+    postimg?: PostImage | null;
+    content: Blocks | null;
 }
 
 const { id, date_created, title, category, postimg, content } = Astro.props;
-const cardContent: string = content.blocks?.find((item: any) => item.type === 'paragraph');
+const cardContent: Block | null = content?.blocks.find((item: Block) => item.type === 'paragraph') ?? null;
 ---
 
 <article>
-    <div class="flex w-full">
+    <div class="flex w-full justify-center">
         {postimg != null ? (
-            <a href={`/blog/${id}`} class="block transform-gpu transition ease-in scale-100 hover:scale-105">
+            <a href={`/blog/${id}`} class="block transform-gpu transition ease-in scale-100 hover:scale-105 w-full">
                 <Image
                     src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${postimg.id}`}
-                    alt={postimg.caption ?? ''}
+                    alt={postimg.description ?? ''}
                     width={postimg.width}
                     height={postimg.height}
-                    class="aspect-auto rounded-2xl overflow-hidden w-full" />
+                    class="aspect-auto rounded-2xl overflow-hidden w-full"
+                    transition:animate="slide" />
             </a>
         ) : null}
     </div>
@@ -52,6 +55,6 @@ const cardContent: string = content.blocks?.find((item: any) => item.type === 'p
         </a>
     </div>
     <div class="flex w-full pt-2 px-4">
-        <p class="w-full line-clamp-2">{cardContent.data.text}</p>
+        <p class="w-full line-clamp-2">{cardContent?.data.text}</p>
     </div>
 </article>

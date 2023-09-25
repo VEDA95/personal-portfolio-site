@@ -2,8 +2,9 @@
 import Layout from '../../layouts/blog.astro';
 import Post from '../../components/post.astro';
 import { fetchBlogPosts } from '../../data/blog';
+import type { Posts, Post as PostsItem } from '../../data/types/blog';
 
-const data: any = await fetchBlogPosts();
+const data: Posts = await fetchBlogPosts();
 ---
 
 <Layout title="Stefan's Corner - Blog">
@@ -12,8 +13,8 @@ const data: any = await fetchBlogPosts();
             <h1 class="text-4xl font-bold">Latest Posts</h1>
         </section>
         <div class="flex w-full justify-center mt-20 ">
-            <section class="grid w-full md:w-3/5 px-8 sm:px-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:[&amp;>*:first-child]:col-span-3">
-                {data?.map((item: any) => <Post id={item.id} date_created={item.date_created} title={item.title} category={item.category} postimg={item.postimg} content={item.content} />)}
+            <section class="grid w-full md:w-1/2 px-8 md:px-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:[&>*:first-child]:col-span-2 md:[&>*:first-child]:col-span-3">
+                {data.map((item: PostsItem) => <Post id={item.id} date_created={item.date_created} title={item.title} category={item.category} postimg={item.postimg} content={item.content} />)}
             </section>
         </div>
     </main>
