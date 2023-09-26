@@ -12,4 +12,4 @@ export interface Project {
     page_id: string;
 }
 
-export type Projects = Array<Project>;
+export default type Projects = Array<Project>;

@@ -1,6 +1,6 @@
 import type { Blocks } from './block';
 
-export interface Page {
+export default interface Page {
     id: string;
     date_created: string;
     date_updated: string | null;
