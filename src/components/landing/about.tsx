@@ -45,7 +45,7 @@ export default function AboutSection({ data }: AboutSectionProps): ReactElement<
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section className="flex flex-col w-full min-h-landing-panel justify-center mt-32 px-6 md:px-8">
+            <section className="flex flex-col snap-center w-full min-h-landing-panel justify-center mt-32 px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16 pl-0 md:pl-48 justify-center md:justify-start">
                     <animated.h1
                         className="font-bold text-4xl md:text-6xl transform-gpu transition-opacity ease-in"
