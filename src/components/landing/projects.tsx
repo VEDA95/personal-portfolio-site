@@ -3,31 +3,11 @@ import { useSpring, animated } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import classNames from 'classnames';
 import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'react';
+import type Projects from '../../data/types/projects';
 
-
-interface ProjectItemProps extends PropsWithChildren {
-    id: string;
-    img_id: string | null;
-    heading: string;
-    description?: string;
-    topMargin?: boolean;
-}
-
-interface IProjectSectionItem {
-    id: string;
-    date_created: string;
-    date_updated: string | null;
-    name: string;
-    longdescription: string | null;
-    shortdescription: string | null;
-    panelimg: string | null;
-    page_id: string | null;
-}
-
-type ProjectDataType = Array<IProjectSectionItem>;
 type ViewPortQueryType = '' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export interface ProjectProps {
-    data: ProjectDataType;
+    data: Projects;
 }
 
 export function ProjectItem({ id, heading, description, children, img_id, topMargin = false }: ProjectItemProps): ReactElement<FC> {

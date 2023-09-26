@@ -2,23 +2,10 @@ import { useEffect, useCallback, useRef, useMemo } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import type { ReactElement, FC, MutableRefObject } from 'react';
+import type { Blocks } from '../../data/types/block.ts';
 
-export interface ISectionBlock {
-    id: string;
-    type: string;
-    data: {
-        text: string;
-        level?: number;
-    },
-    tunes: {
-        alignment: any;
-    }
-}
 export interface AboutSectionProps {
-    data: {
-        time: number;
-        blocks: Array<ISectionBlock>;
-    };
+    data: Blocks;
 }
 
 export default function AboutSection({ data }: AboutSectionProps): ReactElement<FC> {
