@@ -12,16 +12,17 @@ export interface Props {
     category: string;
     postimg?: PostImage | null;
     content: Blocks | null;
+    categoryQuery?: boolean;
 }
 
-const { id, date_created, title, category, postimg, content } = Astro.props;
+const { id, date_created, title, category, postimg, content, categoryQuery } = Astro.props;
 const cardContent: Block | null = content?.blocks.find((item: Block) => item.type === 'paragraph') ?? null;
 ---
 
 <article>
     <div class="flex w-full justify-center">
         {postimg != null ? (
-            <a href={`/blog/${id}`} class="block transform-gpu transition ease-in scale-100 hover:scale-105 w-full">
+            <a href={categoryQuery ? `/blog/${id}?category=${category}` : `/blog/${id}`} class="block transform-gpu transition ease-in scale-100 hover:scale-105 w-full">
                 <Image
                     src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${postimg.id}`}
                     alt={postimg.description ?? ''}

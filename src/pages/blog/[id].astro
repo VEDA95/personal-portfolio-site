@@ -8,16 +8,25 @@ import { faChevronLeft } from '@fortawesome/pro-regular-svg-icons';
 import type { Post as PostsItem } from '../../data/types/blog';
 
 const { id } = Astro.params;
+const category: string | null = Astro.url.searchParams.get('category');
 const data: PostsItem = await fetchBlogPost(id as string);
+const back_to_category_page: boolean = category === 'after-hours' || category === 'software-and-tech';
+let category_formatted: string = '';
+
+if(category === 'after-hours') {
+    category_formatted = 'After Hours';
+} else if(category === 'software-and-tech') {
+    category_formatted = 'Software / Tech'
+}
 ---
 
 <Layout title="Stefan's Corner - Blog">
     <main class="row-span-6 relative">
         <div class="flex flex-col w-full items-center">
             <div class="flex flex-row p-8 w-full">
-                <a href="/blog" class="text-sm transition-colors duration-300 hover:text-dark-red">
+                <a href={back_to_category_page ? `/blog/categories/${category}` : '/blog'} class="text-sm transition-colors duration-300 hover:text-dark-red">
                     <FontAwesomeIcon icon={faChevronLeft} client:idle />
-                    <span>Back to Blog Homepage</span>
+                    <span>Back to {back_to_category_page ? `the ${category_formatted} Page` : 'Blog Homepage'}</span>
                 </a>
             </div>
             {data.postimg != null ? (
