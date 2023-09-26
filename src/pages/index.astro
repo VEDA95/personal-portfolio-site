@@ -8,9 +8,9 @@ import ProjectSection from '../components/landing/projects';
 import ContactSection from '../components/landing/contact';
 import UpSection from '../components/landing/up';
 import fetchLandingPageData from '../data/landing';
+import type LandingPage from '../data/types/landing';
 
-
-const data: any = await fetchLandingPageData();
+const data: LandingPage = await fetchLandingPageData();
 ---
 
 <Layout title="Stefan's Corner - Home">

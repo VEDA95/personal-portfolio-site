@@ -3,11 +3,13 @@ import Layout from '../layouts/base.astro';
 import Block from '../components/block.astro';
 import SkillComponent from '../components/skills';
 import { fetchSkillPageData, fetchSkills } from '../data/skills';
+import type Page from '../data/types/page';
+import type Skills  from '../data/types/skills';
 
-const [pageData, skillData]: Array<any> = await Promise.allSettled([
+const [pageData, skillData] = await Promise.allSettled<Page | Skills>([
     fetchSkillPageData(),
     fetchSkills()
-]);
+]) as [PromiseFulfilledResult<Page>, PromiseFulfilledResult<Skills>];
 ---
 
 <Layout title="Stefan's Corner - Skills">

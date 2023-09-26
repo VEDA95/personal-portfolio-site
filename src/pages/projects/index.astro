@@ -3,11 +3,13 @@ import Layout from '../../layouts/base.astro';
 import Block from '../../components/block.astro';
 import ProjectsList from '../../components/projects';
 import { fetchProjectPageData, fetchProjects } from '../../data/projects';
+import type Page from '../../data/types/page';
+import type Projects from '../../data/types/projects';
 
-const [pageData, projects]: Array<any> = await Promise.allSettled([
+const [pageData, projects] = await Promise.allSettled<Page | Projects>([
     fetchProjectPageData(),
     fetchProjects()
-]);
+]) as [PromiseFulfilledResult<Page>, PromiseFulfilledResult<Projects>];
 ---
 
 <Layout title="Stefan's Corner - Projects">

@@ -4,8 +4,9 @@ import Block from '../components/block.astro';
 import ContactForm from '../components/contact';
 import Banner from '../components/banner';
 import fetchContactPageData from '../data/contact';
+import type Page from '../data/types/page';
 
-const data: any = await fetchContactPageData();
+const data: Page = await fetchContactPageData();
 ---
 
 <Layout title="Stefan's Corner - Contact">

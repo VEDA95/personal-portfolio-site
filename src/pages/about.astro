@@ -2,8 +2,9 @@
 import Layout from '../layouts/base.astro';
 import Block from '../components/block.astro';
 import fetchAboutPageData from '../data/about';
+import type Page from '../data/types/page';
 
-const data: any = await fetchAboutPageData();
+const data: Page = await fetchAboutPageData();
 ---
 
 <Layout title="Stefan's Corner - About">
