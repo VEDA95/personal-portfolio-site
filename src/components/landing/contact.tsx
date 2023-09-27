@@ -43,7 +43,7 @@ export default function ContactSection(): ReactElement<FC> {
     return (
         <Waypoint onEnter={handleEnter}>
             <section className="flex flex-col snap-start w-full min-h-landing-panel justify-center mt-32 px-6 pb-6 md:px-8 md:pb-8">
-                <div className="flex flex-col w-full h-52 justify-center mt-24 pl-8">
+                <div className="flex flex-col w-full h-52 justify-center mt-24 pl-8 pt-20">
                     <animated.div className="flex flex-col w-full transition-opacity transform-gpu" style={headingSpringStyle}>
                         <h1 className="text-6xl font-bold">Want to get in touch?</h1>
                         <div className="flex flex-row w-full pl-3 pt-3">
