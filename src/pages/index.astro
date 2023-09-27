@@ -13,7 +13,7 @@ import type LandingPage from '../data/types/landing';
 const data: LandingPage = await fetchLandingPageData();
 ---
 
-<Layout title="Stefan's Corner - Home" landingPage={true}>
+<Layout title="Stefan's Corner - Home" landingPage>
 	<main class="row-span-6 relative">
 		<ParticleBackground client:idle />
 		<HeroSection client:load />
