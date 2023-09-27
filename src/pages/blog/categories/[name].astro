@@ -1,0 +1,30 @@
+---
+import Layout from '../../../layouts/blog.astro';
+import Post from '../../../components/post.astro';
+import { fetchBlogPostsByCategory } from '../../../data/blog';
+import type { Posts, Post as PostsItem } from '../../../data/types/blog';
+
+
+const { name } = Astro.params;
+const data: Posts = await fetchBlogPostsByCategory(name as string);
+let category: string = '';
+
+if(name === 'after-hours') {
+    category = 'After Hours';
+} else if(name === 'software-and-tech') {
+    category = 'Software / Tech';
+}
+---
+
+<Layout title="Stefan's Corner - Blog">
+    <main class="row-span-6 relative">
+        <section class="flex p-8">
+            <h1 class="text-4xl font-bold">{category}</h1>
+        </section>
+        <div class="flex w-full justify-center">
+            <section class="grid w-full md:w-2/3 px-8 md:px-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                {data.map((item: PostsItem) => <Post id={item.id} date_created={item.date_created} title={item.title} category={item.category} postimg={item.postimg} content={item.content} categoryQuery />)}
+            </section>
+        </div>
+    </main>
+</Layout>

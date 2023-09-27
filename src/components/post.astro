@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faHashtag } from '@fortawesome/pro-regular-svg-icons';
+import type { Blocks, Block } from '../data/types/block';
+import type { Image as PostImage } from '../data/types/image';
+
+export interface Props {
+    id: string;
+    date_created: string;
+    title: string;
+    category: string;
+    postimg?: PostImage | null;
+    content: Blocks | null;
+    categoryQuery?: boolean;
+}
+
+const { id, date_created, title, category, postimg, content, categoryQuery } = Astro.props;
+const cardContent: Block | null = content?.blocks.find((item: Block) => item.type === 'paragraph') ?? null;
+---
+
+<article>
+    <div class="flex w-full justify-center">
+        {postimg != null ? (
+            <a href={categoryQuery ? `/blog/${id}?category=${category}` : `/blog/${id}`} class="block transform-gpu transition ease-in scale-100 hover:scale-105 w-full">
+                <Image
+                    src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${postimg.id}`}
+                    alt={postimg.description ?? ''}
+                    width={postimg.width}
+                    height={postimg.height}
+                    class="aspect-auto rounded-2xl overflow-hidden w-full"
+                    transition:name="blog-image-transition" />
+            </a>
+        ) : null}
+    </div>
+    <div class="flex w-full space-x-2 pt-4 px-4">
+        <div class="flex flex-col">
+            <div class="flex">
+                <FontAwesomeIcon icon={faCalendar} className="pr-2 align-middle" />
+                <span class="font-bold text-xs">{new Date(date_created).toDateString()}</span>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <div class="flex">
+                <FontAwesomeIcon icon={faHashtag} className="pr-2 align-middle" />
+                {category !== 'general' ?
+                    <a href={`/blog/categories/${category}`} class="font-bold text-xs">{category}</a> :
+                    <span class="font-bold text-xs">{category}</span>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="flex w-full pt-2 px-4">
+        <a href={`/blog/${id}`}>
+            <h2 class="text-lg font-bold">{title}</h2>
+        </a>
+    </div>
+    <div class="flex w-full pt-2 px-4">
+        <p class="w-full line-clamp-2">{cardContent?.data.text}</p>
+    </div>
+</article>

@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/blog.astro';
+import Block from '../../components/block.astro';
+import { fetchBlogPost } from '../../data/blog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/pro-regular-svg-icons';
+import type { Post as PostsItem } from '../../data/types/blog';
+
+const { id } = Astro.params;
+const category: string | null = Astro.url.searchParams.get('category');
+const data: PostsItem = await fetchBlogPost(id as string);
+const back_to_category_page: boolean = category === 'after-hours' || category === 'software-and-tech';
+let category_formatted: string = '';
+
+if(category === 'after-hours') {
+    category_formatted = 'After Hours';
+} else if(category === 'software-and-tech') {
+    category_formatted = 'Software / Tech';
+}
+---
+
+<Layout title="Stefan's Corner - Blog">
+    <main class="row-span-6 relative">
+        <div class="flex flex-col w-full items-center">
+            <div class="flex flex-row p-8 w-full">
+                <a href={back_to_category_page ? `/blog/categories/${category}` : '/blog'} class="text-sm transition-colors duration-300 hover:text-dark-red">
+                    <FontAwesomeIcon icon={faChevronLeft} client:idle />
+                    <span>Back to {back_to_category_page ? `the ${category_formatted} Page` : 'Blog Homepage'}</span>
+                </a>
+            </div>
+            {data.postimg != null ? (
+                <div class="flex flex-row w-full justify-center pt-16 pb-8">
+                    <Image
+                        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${data.postimg.id}`}
+                        width={data.postimg.width}
+                        height={data.postimg.height}
+                        alt={data.postimg.description ?? ''}
+                        class="aspect-auto overflow-hidden rounded-2xl w-4/5 h-4/5 md:w-2/3 md:h-2/3"
+                        transition:name="blog-image-transition" />
+                </div>
+            ) : null}
+            <div class="flex flex-row w-full justify-center">
+                <h1 class="font-bold text-5xl md:text-6xl py-10">{data.title}</h1>
+            </div>
+            {data.content?.blocks != null ? (
+                <Block widthClass="w-4/5 md:w-3/5" blocks={data.content.blocks} />
+            ) : null}
+        </div>
+        <section class="flex px-8 pt-8">
+            <h1 class="text-4xl font-bold">Latest Posts</h1>
+        </section>
+        <section class="flex w-full justify-center mt-20 ">
+        </section>
+    </main>
+</Layout>
