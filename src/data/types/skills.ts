@@ -11,4 +11,4 @@ export interface Skill {
     page_id: string;
 }
 
-export default type Skills = Array<Skill>;
+export type Skills = Array<Skill>;

@@ -1,6 +1,6 @@
 import client from './directus';
 import { readSingleton, readItems, readItem } from '@directus/sdk';
-import type { Page } from './types/page';
+import type Page from './types/page';
 import type { Projects, Project } from './types/projects';
 
 export async function fetchProjectPageData(): Promise<Page> {
