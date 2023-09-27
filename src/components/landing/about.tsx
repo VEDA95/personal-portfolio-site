@@ -2,7 +2,7 @@ import { useEffect, useCallback, useRef, useMemo } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import type { ReactElement, FC, MutableRefObject } from 'react';
-import type { Blocks } from '../../data/types/block.ts';
+import type { Blocks, Block } from '../../data/types/block.ts';
 
 export interface AboutSectionProps {
     data: Blocks;
@@ -29,9 +29,9 @@ export default function AboutSection({ data }: AboutSectionProps): ReactElement<
             contentApi.start({translateY: '0', opacity: 100});
         }, 500);
     }, []);
-    const [header, content] = useMemo<[ISectionBlock | null, Array<ISectionBlock>]>(() => {
-        const header: ISectionBlock | undefined = data.blocks.find((item: ISectionBlock): boolean => item.type === 'header' && item.data.level === 1);
-        const content: Array<ISectionBlock> = data.blocks.filter((item: ISectionBlock): boolean => item.type !== 'header' || (item.type === 'header' && item.data.level !== 1));
+    const [header, content] = useMemo<[Block | null, Array<Block>]>(() => {
+        const header: Block | undefined = data.blocks.find((item: Block): boolean => item.type === 'header' && item.data.level === 1);
+        const content: Array<Block> = data.blocks.filter((item: Block): boolean => item.type !== 'header' || (item.type === 'header' && item.data.level !== 1));
 
         return [header ?? null, content];
     }, [data]);
@@ -45,7 +45,7 @@ export default function AboutSection({ data }: AboutSectionProps): ReactElement<
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section className="flex flex-col snap-center w-full min-h-landing-panel justify-center mt-32 px-6 md:px-8">
+            <section className="flex flex-col snap-end md:snap-center w-full min-h-landing-panel justify-center mt-32 px-6 md:px-8">
                 <div className="flex flex-row w-full pt-16 pl-0 md:pl-48 justify-center md:justify-start">
                     <animated.h1
                         className="font-bold text-4xl md:text-6xl transform-gpu transition-opacity ease-in"
@@ -58,7 +58,7 @@ export default function AboutSection({ data }: AboutSectionProps): ReactElement<
                         <animated.div
                             className="transition-opacity transform-gpu ease-in"
                             style={contentSpringStyles}>
-                            {content.map((item: ISectionBlock, index: number): ReactElement<FC> => {
+                            {content.map((item: Block, index: number): ReactElement<FC> => {
                                 if(index === 0) return <p key={`about-content-para-${index + 1}`} className="text-center">{item.data.text}</p>;
 
                                 return <p key={`about-content-para-${index + 1}`} className="pt-4 text-center">{item.data.text}</p>;

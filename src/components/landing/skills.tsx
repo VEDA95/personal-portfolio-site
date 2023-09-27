@@ -8,6 +8,7 @@ import { far } from '@fortawesome/pro-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import type { ReactElement, FC, MutableRefObject } from 'react';
 import type { IconName } from '@fortawesome/fontawesome-svg-core';
+import type { Skills } from '../../data/types/skills';
 
 export interface SkillPanelProps {
     name: string;
@@ -18,20 +19,8 @@ export interface SkillPanelProps {
     }
 }
 
-interface ISkillSectionItem {
-    id: string;
-    date_created: string;
-    date_updated: string | null;
-    name: string;
-    icon: string | null;
-    category: string;
-    longdescription: string | null;
-    shortdescription: string | null;
-    page_id: string | null;
-}
-
 export interface SkillSectionProps {
-    data: Array<ISkillSectionItem>;
+    data: Skills;
 }
 
 library.add(far, fab);
@@ -96,8 +85,8 @@ export default function SkillsSection({ data }: SkillSectionProps): ReactElement
 
     return (
         <Waypoint onEnter={handleEnter}>
-            <section ref={sectionRef} className="flex flex-col snap-end w-full min-h-landing-panel mt-32 bg-crimson-red px-6 md:px-8">
-                <div className="flex flex-row w-full pt-16">
+            <section ref={sectionRef} className="flex flex-col snap-start md:snap-end mt-32 w-full min-h-landing-panel bg-crimson-red px-6 md:px-8">
+                <div className="flex flex-row w-full pt-40 md:pt-16">
                     <h1 className="text-6xl font-bold">Skills</h1>
                 </div>
                 <div className="flex flex-col w-full items-center py-20 md:py-24">

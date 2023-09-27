@@ -3,12 +3,22 @@ import { useSpring, animated } from '@react-spring/web';
 import { Waypoint } from 'react-waypoint';
 import classNames from 'classnames';
 import type { ReactElement, FC, PropsWithChildren, MutableRefObject } from 'react';
-import type Projects from '../../data/types/projects';
+import type { Projects, Project } from '../../data/types/projects';
+import type { Image } from '../../data/types/image';
 
-type ViewPortQueryType = '' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export interface ProjectItemProps extends PropsWithChildren {
+    id: string;
+    img_id: string | null;
+    heading: string;
+    description?: string;
+    topMargin?: boolean;
+}
+
 export interface ProjectProps {
     data: Projects;
 }
+
+export type ViewPortQueryType = '' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export function ProjectItem({ id, heading, description, children, img_id, topMargin = false }: ProjectItemProps): ReactElement<FC> {
     const containerClasses: string = classNames('flex flex-col bg-neutral-200 text-neutral-900 overflow-clip rounded-md transition-colors group duration-300 ease-in hover:cursor-pointer hover:bg-dark-red hover:text-neutral-200', {
@@ -81,13 +91,13 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
             return;
         }
     }, [viewPortQuery]);
-    const [columnData1, columnData2, columnData3, columnData4] = useMemo<Array<ProjectDataType>>(() => {
-        let output1: ProjectDataType = [];
-        let output2: ProjectDataType = [];
-        let output3: ProjectDataType = [];
-        let output4: ProjectDataType = [];
+    const [columnData1, columnData2, columnData3, columnData4] = useMemo<Array<Projects>>(() => {
+        let output1: Projects = [];
+        let output2: Projects = [];
+        let output3: Projects = [];
+        let output4: Projects = [];
         let index: number;
-        let item: IProjectSectionItem;
+        let item: Project;
 
         if(viewPortQuery === 'md') {
             console.log(viewPortQuery);
@@ -159,16 +169,16 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
     return (
         <Waypoint onEnter={handleEnter}>
             <section className="flex flex-col snap-center w-full min-h-landing-panel items-center mt-32 px-6 pb-6 md:px-8 md:pb-8">
-                <div className="flex flex-row w-full pt-16 justify-center md:justify-start">
+                <div className="flex flex-row w-full pt-20 justify-center md:justify-start">
                     <h1 className="text-6xl font-bold">Projects</h1>
                 </div>
                 <div className="flex flex-row w-full pt-16 justify-center">
                     <animated.div className={gridClasses} style={sectionSpringStyle}>
                         {columnData1.length > 0 ? (
                             <ul className="grid auto-rows-[25rem] gap-y-4">
-                                {columnData1.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                {columnData1.map((item: Project, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name} img_id={item.panelimg}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-1`} id={item.id} heading={item.name} img_id={item.panelimg.id}>
                                             <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -177,9 +187,9 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                         ) : null}
                         {columnData2.length > 0 ? (
                             <ul className="grid auto-rows-[25rem] gap-y-4 mt-4 sm:mt-10">
-                                {columnData2.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                {columnData2.map((item: Project, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name} img_id={item.panelimg}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-2`} id={item.id} heading={item.name} img_id={item.panelimg.id}>
                                             <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -188,9 +198,9 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                         ) : null}
                         {columnData3.length > 0 ? (
                              <ul className="grid auto-rows-[25rem] gap-y-4">
-                                {columnData3.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                {columnData3.map((item: Project, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name} img_id={item.panelimg}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-3`} id={item.id} heading={item.name} img_id={item.panelimg.id}>
                                             <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
@@ -199,9 +209,9 @@ export default function ProjectsSection({ data }: ProjectProps): ReactElement<FC
                         ) : null}
                         {columnData4.length > 0 ? (
                             <ul className="grid auto-rows-[25rem] gap-y-4 mt-4 sm:mt-10">
-                                {columnData4.map((item: IProjectSectionItem, index: number): ReactElement<FC> => {
+                                {columnData4.map((item: Project, index: number): ReactElement<FC> => {
                                     return (
-                                        <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name} img_id={item.panelimg}>
+                                        <ProjectItem key={`project-item-${index + 1}-column-4`} id={item.id} heading={item.name} img_id={item.panelimg.id}>
                                             <p className="line-clamp-3 text-center">{item.shortdescription}</p>
                                         </ProjectItem>
                                     );
