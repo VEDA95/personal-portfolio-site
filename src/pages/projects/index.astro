@@ -4,7 +4,7 @@ import Block from '../../components/block.astro';
 import ProjectsList from '../../components/projects';
 import { fetchProjectPageData, fetchProjects } from '../../data/projects';
 import type Page from '../../data/types/page';
-import type Projects from '../../data/types/projects';
+import type { Projects } from '../../data/types/projects';
 
 const [pageData, projects] = await Promise.allSettled<Page | Projects>([
     fetchProjectPageData(),
