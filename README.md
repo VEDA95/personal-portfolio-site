@@ -1,54 +1,19 @@
-# Astro Starter Kit: Basics
+# Stefan's Corner Portfolio Website
 
-```
-npm create astro@latest -- --template basics
-```
+This is the Github repository for me personal portfolio site. The repository only pertains to the frontend site. There is no repository for the backend as I am using [Directus](https://directus.io/) for this website. Further more the project uses [Typescript](https://www.typescriptlang.org/) to ensure type safety.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+The javascript libraries or libraries Used to build this site are:
+- [Astro.JS](https://astro.build/)
+- [React.JS](https://react.dev/)
+- [Three.JS](https://threejs.org/)
+- [React Three](https://github.com/pmndrs/react-three-fiber)
+- [React Spring](https://www.react-spring.dev/)
+- [Zustand](https://github.com/pmndrs/zustand)
+- [React Waypoint](https://github.com/civiccc/react-waypoint)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Beyond Javascript frameworks/libraries the website is styled using CSS styles provided by [Tailwind CSS](https://tailwindcss.com/)
 
 ## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Feel free to check [the official Astro](https://docs.astro.build) or jump onto the [Astro Discord server](https://astro.build/chat).
+Also feel free to check out [Directus](https://directus.io/).
