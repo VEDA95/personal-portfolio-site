@@ -12,7 +12,7 @@ export async function fetchBlogPosts(): Promise<Posts> {
                 _eq: 'published'
             }
         }
-    }));
+    })) as Posts;
 }
 
 export async function fetchBlogPost(id: string): Promise<Post> {
@@ -23,7 +23,7 @@ export async function fetchBlogPost(id: string): Promise<Post> {
                 _eq: 'published'
             }
         }
-    }));
+    })) as Post;
 }
 
 export async function fetchBlogPostsByCategory(category: string): Promise<Posts> {
@@ -37,5 +37,5 @@ export async function fetchBlogPostsByCategory(category: string): Promise<Posts>
                 _eq: category
             }
         }
-    }));
+    })) as Posts;
 }

@@ -5,5 +5,5 @@ import type Page from './types/page';
 export default async function fetchContactPageData(): Promise<Page> {
     return await client.request(readSingleton('contactpage', {
         fields: ['*']
-    }));
+    })) as Page;
 }

@@ -6,11 +6,11 @@ import type { Skills } from './types/skills';
 export async function fetchSkillPageData(): Promise<Page> {
     return await client.request(readSingleton('skillpage', {
         fields: ['*']
-    }));
+    })) as Page;
 }
 
 export async function fetchSkills(): Promise<Skills> {
     return await client.request(readItems('skills', {
         fields: ['*']
-    }));
+    })) as Skills;
 }

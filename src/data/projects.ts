@@ -6,17 +6,17 @@ import type { Projects, Project } from './types/projects';
 export async function fetchProjectPageData(): Promise<Page> {
     return await client.request(readSingleton('projectpage', {
         fields: ['*']
-    }));
+    })) as Page;
 }
 
 export async function fetchProjects(): Promise<Projects> {
     return await client.request(readItems('projects', {
         fields: ['*']
-    }));
+    })) as Projects;
 }
 
 export async function fetchProject(id: string): Promise<Project> {
     return await client.request(readItem('projects', id, {
         fields: ['*', 'panelimg.*']
-    }));
+    })) as Project;
 }
